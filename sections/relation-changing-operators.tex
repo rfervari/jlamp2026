@@ -58,7 +58,7 @@ the satisfaction relation $\models$ recursively as follows:
 Note that  $\model^{-(w,v)}_\rho$ is a well-formed model, since it is updated in the context of the precondition $P(w,v)\geq \rho$ and, according to its definition, $P^{-(w,v)}_\rho\in Prob(W)$.
 \end{definition}
 
-In the rest of the paper, we will denote  by $\model , u \equiv_{-} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
+In the rest of the paper, we will denote  by $\model , u \equiv_{\mathsf{sb}} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
 
 The semantic interpretation of the sabotage operator describes a scenario in which the probability of the event represented by an edge is reduced. When that is the case, the probability of the remaining ones (that also leave from the same origin state) is increased, in order to guarantee that the probability of all leaving edges sums to 1. For each of these edges, the increase is proportional to their pre-existing probability, so that the relative probabilities of the other positive outgoing transitions are preserved. This is illustrated in Example \ref{ex.sab}.
 
@@ -140,7 +140,7 @@ where $\model^{+(w,v)}_\rho = (W, P^{+(w,v)}_\rho,V)$, with:
 
 Again, note that $\model^{+(w,v)}_\rho$ is a well-formed model.
 
-In what follows, we will denote  by $\model , u \equiv_{+} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the bridge semantics.
+In what follows, we will denote  by $\model , u \equiv_{\mathsf{br}} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the bridge semantics.
 
 \end{definition}
 
@@ -226,7 +226,7 @@ where $\model^{*(w,v)}_\rho = (W, P^{*(w,v)}_\rho,V)$, with:
 
 Again, note that $\model^{*(w,v)}_\rho$ is a well-formed model.
 
-In what follows, we will denote  by $\model , u \equiv_{*} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the swap semantics.
+In what follows, we will denote  by $\model , u \equiv_{\mathsf{sw}} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the swap semantics.
 
 \end{definition}
 

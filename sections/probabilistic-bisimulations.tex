@@ -111,11 +111,11 @@ We note that our definitions of relation-changing bisimulations do not fully gen
 In this section we will start by proving that the notions of bisimulation we just introduced, are adequate for the respective logic. Our first result concerns a minimal condition we aim to satisfy, namely that two probabilistic models that are bisimilar for some of the notions from previous section, satisfy the same set of formulas of the respective logic. 
 
 \begin{theorem}[Invariance]\label{th:invariance}
-    Let $\model=(W,P,V)$ and $\model'=(W',P',V')$ be two probabilistic Kripke models and let $E\subseteq \big((W\times Prob(W)\big) \times \big(W'\times Prob(W')\big)$ be a sabotage (resp. bridge/swap) bisimulation. Then, $(w,P)E(w',P')$ implies $\model,w\equiv_{-}\model',w'$ (resp. $\model,w\equiv_{+}\model',w'$/$\model,w\equiv_{*}\model',w'$).
+    Let $\model=(W,P,V)$ and $\model'=(W',P',V')$ be two probabilistic Kripke models and let $E\subseteq \big((W\times Prob(W)\big) \times \big(W'\times Prob(W')\big)$ be a sabotage (resp. bridge/swap) bisimulation. Then, $(w,P)E(w',P')$ implies $\model,w\equiv_{\mathsf{sb}}\model',w'$ (resp. $\model,w\equiv_{\mathsf{br}}\model',w'$/$\model,w\equiv_{\mathsf{sw}}\model',w'$).
 \end{theorem}
 
 \begin{proof}
-    We prove the theorem by induction over the structure of formulas. Moreover, we will prove a more general result: for all well-founded matrices $\bar{P}$ and $\bar{P'}$, $(w,\bar{P})E(w',\bar{P}')$ implies $(W,\bar{P},V),w\equiv_{-}(W,\bar{P},V')',w'$.  
+    We prove the theorem by induction over the structure of formulas. Moreover, we will prove a more general result: for all well-founded matrices $\bar{P}$ and $\bar{P'}$, $(w,\bar{P})E(w',\bar{P}')$ implies $(W,\bar{P},V),w\equiv_{\mathsf{sb}}(W,\bar{P},V')',w'$.  
     We firstly consider the sabotage semantics.
     
     \medskip
@@ -160,7 +160,7 @@ In this section we will start by proving that the notions of bisimulation we jus
         The reciprocal implication is proved analogously, using \textbf{(sab-zag)}.
     \end{itemize}
 
-    Therefore, since $P$ and $P'$ are well-formed and they are s.t. $(w,P)E(w',P')$, we can conclude that $\model,w\equiv_{-}\model',w'$.
+    Therefore, since $P$ and $P'$ are well-formed and they are s.t. $(w,P)E(w',P')$, we can conclude that $\model,w\equiv_{\mathsf{sb}}\model',w'$.
     
     %$\model,w\models \blacklozenge_\rho \varphi$ \ iff \ $\exists \ v\in W \mbox{ s.t. }  \ P(w,v)\geq \rho, \mbox{ and } \model^{-(w,v)}_\rho, v \models\varphi$
 
@@ -348,13 +348,13 @@ The two types of models will be relevant in our case. Such as it is done for non
 \begin{theorem}
     [Hennessy-Milner for sabotage]
      Let $\model=(W,P,V)$ and $\model'=(W',P',V')$ be two image finite probabilistic Kripke models. Let $\bar{P},\bar{P'}$ be two well-formed probabilistic matrices for sabotage w.r.t. $P,P'$ respectively.  
-    Then, $(W,\bar{P},V),w\equiv_{-}(W',\bar{P}',V'),w'$ implies there exists a sabotage bisimulation $E$ such that $(w,\bar{P})E(w',\bar{P}')$.
+    Then, $(W,\bar{P},V),w\equiv_{\mathsf{sb}}(W',\bar{P}',V'),w'$ implies there exists a sabotage bisimulation $E$ such that $(w,\bar{P})E(w',\bar{P}')$.
 \end{theorem}
 \begin{proof}
 We will prove the relation given by:
 % \textcolor{blue}{RF: $\bar P$ and $\bar{P'}$ must all be image finite, to make sure that we always work with image finite models}
 \begin{align*}
-    E := & \{ ((u,\bar{P}),(u',\bar{P}')) \mid  (W,\bar{P},V), u \equiv_{-} (W,\bar{P}',V) , u ' \text{ and} \\
+    E := & \{ ((u,\bar{P}),(u',\bar{P}')) \mid  (W,\bar{P},V), u \equiv_{\mathsf{sb}} (W,\bar{P}',V) , u ' \text{ and} \\
     & \text{ $\bar{P},\bar{P'}$ are well-formed for sabotage from $P,P'$ respectively} \} 
 \end{align*}
 is a sabotage bisimulation. Thus, for every $\big((w,\bar{P}) ,(w',\bar{P}')\big)\in E$, we have to prove that conditions \textbf{(atom)}, \textbf{(sab-zig)}, \textbf{(sab-zag)}, and \textbf{(p-zigzag)} hold. Notice that by Remark~\ref{rem:well-formed}, models whose underlying probability matrices are $\bar{P}$ and $\bar{P}'$, are image-finite models.
@@ -410,13 +410,13 @@ Once a Hennessy-Milner result for sabotage has been established over models with
     [Hennessy-Milner for bridge]
      Let $\model=(W,P,V)$ and $\model'=(W',P',V')$ be two finite probabilistic Kripke models.
     Let $\bar{P},\bar{P'}$ be two well-formed probabilistic matrices for bridge w.r.t. $P,P'$ resp.  
-    Then, $(W,\bar{P},V),w\equiv_{+}(W',\bar{P}',V'),w'$ implies there exists a bridge bisimulation $E$ s.t. $(w,\bar{P})E(w',\bar{P}')$.
+    Then, $(W,\bar{P},V),w\equiv_{\mathsf{br}}(W',\bar{P}',V'),w'$ implies there exists a bridge bisimulation $E$ s.t. $(w,\bar{P})E(w',\bar{P}')$.
 \end{theorem}
 \begin{proof}
-% Let us define $E$ like in the sabotage case but using the $\equiv_{+}$ notion. 
+% Let us define $E$ like in the sabotage case but using the $\equiv_{\mathsf{br}}$ notion. 
 We will prove the relation given by:
 \begin{align*}
-    E := & \{ ((u,\bar{P}),(u',\bar{P}')) \mid  (W,\bar{P},V), u \equiv_{+} (W,\bar{P}',V) , u ' \text{ and} \\
+    E := & \{ ((u,\bar{P}),(u',\bar{P}')) \mid  (W,\bar{P},V), u \equiv_{\mathsf{br}} (W,\bar{P}',V) , u ' \text{ and} \\
     & \text{ $\bar{P},\bar{P'}$ are well-formed for bridge from $P,P'$ respectively} \} 
 \end{align*}
 is a bridge bisimulation. Again, every well-formed $\bar{P},\bar{P'}$ are guaranteed to be finite provided that $\model$ and $\model'$ are finite models.
@@ -455,12 +455,12 @@ We finish this section with the corresponding Hennessy-Milner result under swap 
 \begin{theorem}
     [Hennessy-Milner for swap]
     Let $\model=(W,P,V)$ and $\model'=(W',P',V')$ be two image finite probabilistic Kripke models. Let $\bar{P},\bar{P'}$ be two well-formed probabilistic matrices for swap w.r.t. $P,P'$ respectively.  
-    Then, $(W,\bar{P},V),w\equiv_{*}(W',\bar{P}',V'),w'$ implies there exists a swap bisimulation $E$ such that $(w,\bar{P})E(w',\bar{P}')$.
+    Then, $(W,\bar{P},V),w\equiv_{\mathsf{sw}}(W',\bar{P}',V'),w'$ implies there exists a swap bisimulation $E$ such that $(w,\bar{P})E(w',\bar{P}')$.
 \end{theorem}
 \begin{proof}
 We will prove the relation given by:
 \begin{align*}
-    E := & \{ ((u,\bar{P}),(u',\bar{P}')) \mid  (W,\bar{P},V), u \equiv_{*} (W,\bar{P}',V) , u ' \text{ and} \\
+    E := & \{ ((u,\bar{P}),(u',\bar{P}')) \mid  (W,\bar{P},V), u \equiv_{\mathsf{sw}} (W,\bar{P}',V) , u ' \text{ and} \\
     & \text{ $\bar{P},\bar{P'}$ are well-formed for swap from $P,P'$ respectively} \} 
 \end{align*}
 is a swap bisimulation. % Again, every well-formed $\bar{P},\bar{P'}$ are guaranteed to be finite provided that $\model$ and $\model'$ are finite models.
