@@ -20,7 +20,7 @@ The idea of changing a probabilistic relation implies that the transition probab
     Prob(W)=\{P\in [0,1]^{W\times W}:\forall w\in W,\displaystyle\sum_{w' \in W} P(w, w') = 1\}.
 \]
 
-% In what follows, we will denote  by $\model , u \equiv_s \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
+% In what follows, we will denote  by $\model , u \equiv_{(-)} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
 
 
 \subsection{Probabilistic Sabotage Operator}
@@ -58,7 +58,7 @@ the satisfaction relation $\models$ recursively as follows:
 Note that  $\model^{-(w,v)}_\rho$ is a well-formed model, since it is updated in the context of the precondition $P(w,v)\geq \rho$ and, according to its definition, $P^{-(w,v)}_\rho\in Prob(W)$.
 \end{definition}
 
-In the rest of the paper, we will denote  by $\model , u \equiv_s \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
+In the rest of the paper, we will denote  by $\model , u \equiv_{-} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
 
 The semantic interpretation of the sabotage operator describes a scenario in which the probability of the event represented by an edge is reduced. When that is the case, the probability of the remaining ones (that also leave from the same origin state) is increased, in order to guarantee that the probability of all leaving edges sums to 1. For each of these edges, the increase is proportional to their pre-existing probability, so that the relative probabilities of the other positive outgoing transitions are preserved. This is illustrated in Example \ref{ex.sab}.
 
@@ -109,11 +109,11 @@ In general we will need to deal with nested updates over the original probabilit
 
 \subsection{Probabilistic Bridge Operator}
 
-Now it is time to move to the bridge case, generalizing~\cite{Fervari14,ArecesFH15}, and being more specific that in the graded case from~\cite{FFM25}. The idea is that if there no way to access some point with a certain probability value, the evaluation is moved to such a point, and the value is added to the traversed edge. This is similar to the graded case, but here we need to be careful to maintain the probability distribution. This is achieved by proportionally transferring the value from other edges to the intended one.
+Now it is time to move to the bridge case, generalizing~\cite{Fervari14,ArecesFH15}, and being more specific than in the graded case from~\cite{FFM25}. The idea is that if there is no way to access some point with a certain probability value, the evaluation is moved to such a point, and the value is added to the traversed edge. This is similar to the graded case, but here we need to be careful to maintain the probability distribution. This is achieved by proportionally transferring the value from other edges to the intended one.
 
 \begin{definition}
-    
-The satisfiability relation $\models$ is defined as in Def.~\ref{def:sab-semantics} for the Boolean cases and for $\Diamond_\rho$, and extended with the following case:
+\label{def:br-sem}
+The satisfaction relation $\models$ is defined as in Def.~\ref{def:sab-semantics} for the Boolean cases and for $\Diamond_\rho$, and extended with the following case:
 \[
     \begin{array}{l@{\ \ }c@{\ \ }l}
     %  \model,w\models p & \iff &  w\in V(p)\\ 
@@ -140,7 +140,7 @@ where $\model^{+(w,v)}_\rho = (W, P^{+(w,v)}_\rho,V)$, with:
 
 Again, note that $\model^{+(w,v)}_\rho$ is a well-formed model.
 
-In what follows, we will denote  by $\model , u \equiv_b \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the bridge semantics.
+In what follows, we will denote  by $\model , u \equiv_{+} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the bridge semantics.
 
 \end{definition}
 
@@ -196,7 +196,7 @@ We conclude this section by introducing a local swap modality, inspired by~\cite
 
 \begin{definition}
     \label{def:swap-semantics}
-    The satisfiability relation $\models$ is defined as in Def.~\ref{def:sab-semantics} for the Boolean cases and for $\Diamond_\rho$, and extended with the following case:
+    The satisfaction relation $\models$ is defined as in Def.~\ref{def:sab-semantics} for the Boolean cases and for $\Diamond_\rho$, and extended with the following case:
 \[
     \begin{array}{l@{\ \ }c@{\ \ }l}
     %  \model,w\models p & \iff &  w\in V(p)\\ 
@@ -226,7 +226,7 @@ where $\model^{*(w,v)}_\rho = (W, P^{*(w,v)}_\rho,V)$, with:
 
 Again, note that $\model^{*(w,v)}_\rho$ is a well-formed model.
 
-In what follows, we will denote  by $\model , u \equiv_w \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the swap semantics.
+In what follows, we will denote  by $\model , u \equiv_{*} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the swap semantics.
 
 \end{definition}
 
