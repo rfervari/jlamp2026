@@ -1,0 +1,142 @@
+\documentclass[preprint]{elsarticle}
+
+\usepackage{fixme}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{booktabs}
+\usepackage{dsfont}
+\usepackage{tabularx}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usetikzlibrary{arrows,arrows.meta,automata,positioning}
+\usepackage{mathrsfs}
+% \usepackage{hyperref}
+\usepackage{amsthm}
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{question}[theorem]{Question}
+
+% Definition-like environments
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+
+% Remark-like environments
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\biboptions{longnamesfirst,semicolon}
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=green!50!black,
+    urlcolor=red!70!black,
+    filecolor=magenta
+]{hyperref}
+\newcommand{\model}{\M}
+\newcommand{\prop}{\mathsf{Prop}}
+\def\M{\mathcal{M}}
+
+\renewcommand{\iff}{\text{\it iff}}
+
+\newcommand{\form}{\mathsf{Form}}
+
+\newcommand{\modsabx}[2]{{#1}^x_{-#2}}
+\newcommand{\modsab}[3]{{#1}^{#3}_{-#2}}
+\newcommand{\modswapx}[2]{{#1}^x_{*#2}}
+\newcommand{\modswap}[3]{{#1}^{#3}_{*#2}}
+\newcommand{\modbridx}[2]{{#1}^x_{+#2}}
+\newcommand{\modbrid}[3]{{#1}^{#3}_{+#2}}
+
+\newcommand{\sabbisim}{\leftrightarroweq^-}
+\newcommand{\swapbisim}{\leftrightarroweq^{\shortleftarrow}}
+\newcommand{\bridbisim}{\leftrightarroweq^{+}}
+\newcommand{\truthset}[3]{\llbracket{#1}\rrbracket_{#2}^{#3}}
+
+\newcommand{\tup}[1]{\langle{#1}\rangle}
+
+\DeclareMathOperator{\dsab}{\tup{\mathsf{sb}}}
+\DeclareMathOperator{\dbr}{\tup{\mathsf{br}}}
+\DeclareMathOperator{\dsw}{\tup{\mathsf{sw}}}
+
+\begin{document}
+
+\begin{frontmatter}
+
+% \title{Bisimulations for Probabilistic \\ Relation-Changing Modal Logics}
+\title{Changing the Odds: Relation-Changing Modal Logics for Probabilistic Systems}
+\author[unc,conicet]{Raul Fervari}
+\author[aveiro,coimbra]{Daniel Figueiredo}
+\author[aveiro]{Manuel A. Martins}
+\author[unc]{Gonzalo Zigar\'an}
+
+\affiliation[unc]{
+    organization={FAMAF, Universidad Nacional de C\'ordoba},
+    country={Argentina}
+}
+
+\affiliation[conicet]{
+    organization={Consejo Nacional de Investigaciones Cient\'ificas y T\'ecnicas},
+    country={Argentina}
+}
+
+\affiliation[aveiro]{
+    organization={Center for Research and Development in Mathematics and Applications (CIDMA), Universidade de Aveiro},
+    country={Portugal}
+}
+
+\affiliation[coimbra]{
+    organization={Association for Innovation and Biomedical Research on Light and Image},
+    city={Coimbra},
+    country={Portugal}
+}
+
+\begin{abstract} 
+Relation-changing logics are formalisms for describing dynamic phenomena over discrete models. Two main approaches have been proposed to reason in this setting: syntactic ones, where the model is changed by logical operators in the language, and semantic ones, where the change in the system is parameterized by the model itself. In recent years, the relation-changing paradigm has been extended in several directions, for instance to paraconsistent and fuzzy settings. In this work, we introduce relation-changing logics over probabilistic transition systems. Specifically, we propose three operators: a local sabotage modality, which reduces the probabilities of the edges adjacent to the evaluation point; a local bridge modality, which instead increases them; and a local swap modality, which reverses the probability between two adjacent nodes. We study the semantic effects of adding these modalities. In particular, we investigate novel notions of probabilistic bisimulation and establish their adequacy through the corresponding invariance and Hennessy-Milner results.
+\end{abstract}
+
+\begin{keyword}
+Relation-Changing \sep
+Probabilistic Logics \sep
+% Probabilistic Kripke Model \sep
+Bisimulation \sep
+Sabotage Logic \sep
+Bridge Logic
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/introduction}
+\input{sections/probabilistic-modal-logic}
+\input{sections/relation-changing-operators}
+\input{sections/probabilistic-bisimulations}
+\input{sections/case-study}
+\input{sections/conclusion}
+
+\paragraph{Acknowledgments.}
+D. Figueiredo and M. A. Martins acknowledge the support of CIDMA (\url{https://ror.org/05pm2mw36})
+under the Portuguese Foundation for Science and Technology 
+(FCT, \url{https://ror.org/00snfqn58}), Grants UID/\allowbreak 04106/\allowbreak 2025 (\href{https://doi.org/10.54499/UID/04106/2025}{DOI}) 
+and UID/\allowbreak PRR/\allowbreak 04106/\allowbreak 2025; and European Funds through SACCCT- IC\&DT - Sistema de Apoio \`a Cria\c c\~ao de Conhecimento Cient\'ifico e Tecnol\'ogico, as part of COMPETE2030, within the project BANKSY with reference number 15253.
+R. Fervari is supported by 
+%
+the EU H2020 research and innovation programme
+under the Marie Sk{\l}odowska-Curie grant agreements 101008233
+({MISSION}),
+%
+the IRP SINFIN, 
+%
+and SeCyT-UNC grant 33620230100178CB.
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}

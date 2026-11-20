@@ -1,0 +1,114 @@
+\section{Case Study}
+
+We conclude by presenting a concrete application of our probabilistic relation-changing framework. Specifically, we illustrate how our logics can be employed to reason about a biological scenario, drawing inspiration from~\cite{ATHGM16}. 
+
+Cells are often subjected to stress for various reasons, including viral infections, replication errors, and exposure to harmful chemicals. In response, cells attempt to repair the resulting damage and maintain their normal functioning. However, when repair is unsuccessful, cells may trigger apoptosis (programmed cell death).
+
+In this paper, we consider a simplified model of cellular dynamics in which DNA damage is caused by ionizing radiation, such as that associated with X-ray imaging procedures, leading to the occurrence of double-strand breaks (DSBs). In~\cite{ATHGM16}, the authors provide evidence that, even after the initial damage has been repaired, the accumulation of residual DSBs increases the likelihood of subsequent repair failure and, consequently, of apoptosis. Inspired by this case study, we propose a representative model (called hereafter $\model$) of these cellular dynamics, depicted in Figure~\ref{ex_apop}. We emphasize that this is not intended to be a biologically rigorous model: the probabilities assigned to the transitions are purely illustrative.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[
+    >=Stealth,
+    node distance=3.5cm,
+    every state/.style={thick, minimum size=1.25cm},
+    every edge/.style={draw, ->, thick},
+    prob/.style={font=\small, fill=white, inner sep=1.4pt},
+    prop/.style={font=\footnotesize\itshape, text=gray!70!black}
+]
+ 
+\node[state, label={[prop]below:healthy (h)}]   (H) {$H$};
+\node[state, right=of H, label={[prop]below:damaged (d)}]  (D) {$D$};
+\node[state, right=of D, label={[prop]below:apoptosis (a)}] (A) {$A$};
+ 
+% Transitions 
+
+\path
+  (H) edge[loop above]  node[above] {0.9} (H)
+      edge[bend left]  node[above] {0.1} (D)
+  (D) edge[bend left]  node[above] {0.8} (H)
+      edge [] node[above] {0.2} (A)
+  (A) edge[loop above] node[above] {1}   (A);
+ 
+\end{tikzpicture}
+\caption{A conceptual model for cell apoptosis after DSB lesion on its DNA.}
+\label{ex_apop}
+\end{figure}
+
+The model $\M=(W,P,V)$ consists of three states, namely, $W=\{h,d,a\}$, representing the cell being $healthy$ ($h$), $damaged$ ($d$), or undergoing $apoptosis$~($a$). The transition probabilities are given by the matrix shown in Table~\ref{ex_matrix}. The valuation function $V:\{H,D,A\}\rightarrow 2^W$ assigns the following sets of states to the respective atomic propositions: $V(H)=\{h\}$, $V(D)=\{d\}$, and $V(A)=\{a\}$.
+
+
+\begin{table}[h!]
+    \centering
+        \caption{Transition probability matrix of model depicted in Fig. \ref{ex_apop}.}
+    \begin{tabular}{|c|c c c|}
+        \hline
+         $\hspace{2.5cm}$&$healthy \ (h)$&$damaged \ (d)$&$apoptosis \ (a)$ \\\hline
+         $healthy \ (h)$&0.9&0.1&$\hspace{2.5cm}$\\
+         $damaged \ (d)$&0.8&&0.2\\
+         $apoptosis \ (a)$&$\hspace{2.5cm}$&$\hspace{2.5cm}$& 1\\ \hline
+    \end{tabular}
+    \label{ex_matrix}
+\end{table}
+
+
+While such a simple model is easy to understand, it fails to fully capture the complex dynamics of the system. Indeed, the fact that cumulative DSB lesions lead to an increased risk of cellular apoptosis, is not captured by it. Nevertheless, relation-changing operators can be used to naturally describe changes in transition probabilities.
+
+For instance, consider the formula $\Diamond_{0.3} A$, that holds whenever:
+
+\medskip
+
+\textit{The probability of transitioning to an $apoptosis$ state in the next step is at least $0.3$.}
+
+\medskip
+
+Thus, one can check that $\M,d\not\models\Diamond_{0.3} A$, because the probability of going from state $damaged$ to $apoptosis$ is only 0.2 and $A$ holds at no other state.
+
+% However, consider the following formula, with $\blacklozenge$ being the probabilistic sabotage operator: 
+However, if we assume that after the cell repairs from a lesion, the probability of the cell to repair again and return to the healthy state reduces by $0.1$, we may consider the following formula, with $\blacklozenge$ being the probabilistic sabotage operator:
+\[ 
+    \blacklozenge_{0.1} \big(H \wedge \Diamond_1 (H \vee \Diamond_{0.3} A )\big).
+\]
+When evaluated at the state $damaged$, this formula expresses that:
+
+\medskip
+
+% \textit{If whenever a cell repairs from a DSB lesion, it reduces the probability of the cell to repair again and return to the $healthy$ state by 0.1 after a new lesion occurs, then when a new lesion occurs, the probability of apoptosis to be induced is now greater or equal than 0.3.}
+\textit{After repairing from a lesion, a cell may either remain healthy or suffer a new lesion that triggers apoptosis with a probability of at least $0.3$.}
+
+\medskip
+% \textit{The probability of successfully repairing a DSB lesion and returning to the $healthy$ state decreases by 0.1, while the probability of triggering apoptosis is at least 0.3.}
+
+
+Let us proceed to evaluate the formula at state $d$. To do so, let us define:
+\[
+    \M'=(W,P',V), \qquad \text{ with } P'=P^{-(d,h)}_{0.1}.
+\]
+Since $H$ holds only at $h$ and $P(d,h)=0.8$, the only possible witness for
+the sabotage operator is $h$. The update transfers probability from the
+transition $(d,h)$ to the other outgoing transition, so
+\[
+    P'(d,a)
+    =P(d,a)+\frac{0.1P(d,a)}{1-P(d,h)}
+    =0.2+\frac{0.1\cdot0.2}{1-0.8}
+    =0.3.
+\]
+Thus $\M',d\models\Diamond_{0.3}A$. Also,
+$\M',a\models\Diamond_{0.3}A$ since $P'(a,a)=1$, and
+$\M',h\models H$. Consequently, every state satisfies
+$H\vee\Diamond_{0.3}A$. The outgoing probabilities from $h$ are unchanged,
+with $P'(h,h)=0.9$, $P'(h,d)=0.1$, and $P'(h,a)=0$. Therefore,
+\begin{align*}
+   &  \M,d\models\blacklozenge_{0.1}
+        \bigl(H\wedge\Diamond_1(H\vee\Diamond_{0.3}A)\bigr)\\
+    \iff \quad  & \M',h\models
+        H\wedge\Diamond_1(H\vee\Diamond_{0.3}A)\\
+    \iff \quad  & \sum_{\substack{x\in W\\
+        \M',x\models H\vee\Diamond_{0.3}A}}P'(h,x)\geq 1\\
+    \iff \quad & P'(h,h)+P'(h,d)+P'(h,a)\geq 1\\
+    \iff \quad & 0.9+0.1+0\geq 1, %\\
+    % \iff \quad & \text{true}.
+\end{align*}
+which is true. The reasoning above illustrates how the use of the probabilistic sabotage operator is useful in such contexts to describe reconfigurable scenarios or where some kind of memory can affect the probability of an edge.
+
+In a similar way, we could use the bridge for modeling scenarios such as cases of immune cells that increase their efficacy while responding to repeated infections by the same virus.
