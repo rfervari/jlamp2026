@@ -4,7 +4,7 @@
 \subsection{Syntax and Semantics}
 
 In this section we present some preliminary notions over probabilistic logics. 
-In what follows, let $\prop$ be a countable set of atomic propositions. Also, for every relation $E\subseteq S\times S$, we use the abbreviation:
+In what follows, let $\prop$ be a non-empty countable set of atomic propositions. Also, for every relation $E\subseteq S\times S$, we use the abbreviation:
 \[ 
     E[U]=\{v \in S  \mid (u,v)\in E \text{ for some }u\in U \}. 
 \] 
@@ -12,7 +12,7 @@ In what follows, let $\prop$ be a countable set of atomic propositions. Also, fo
 \begin{definition} A \emph{probabilistic Kripke model} is a tuple $\M=(W,P, V)$ where:
 
 \begin{itemize}
-    \item $W$ is a finite set of states or worlds; 
+    \item $W$ is a countable set of states or worlds; 
     \item $P : W \times W \rightarrow [0,1]$ is the transition probability matrix where for all $w \in W$, $\displaystyle\sum_{w' \in W} P(w, w') = 1$;
     \item $V : \prop \rightarrow 2^W$ is a function that assigns to each $p \in \prop$ the set of states in which $p$ holds.
 \end{itemize}
@@ -110,7 +110,7 @@ The set of formulas is defined recursively as:
 \[
 \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \Diamond_\rho \varphi,
 \]
-where $p\in\prop$ and $\rho \in [0,1]$.
+where $p\in\prop$ and $\rho \in [0,1]$. We assume other Boolean operators are defined in a usual way.
 \end{definition}
 
 \begin{definition}[Satisfaction]
@@ -156,7 +156,7 @@ To illustrate how the satisfaction is evaluated on a probabilistic Kripke model,
     \label{fig:classic}
 \end{figure}
 
-We define a model $\model=(W,P,V)$, where $W=\{u,v,w,t\}$, $P$ is the transition probability matrix depicted in Table \ref{prob_matrix} and $V: \{p,q\}\rightarrow 2^W$ is defined by $V(p)=\{u,w,t\}$ and $V(q)=\{v,t\}$.
+Let $\prop=\{p,q\}$, we define a model $\model=(W,P,V)$ where  $W=\{u,v,w,t\}$, $P$ is the transition probability matrix depicted in Table~\ref{prob_matrix} and $V: \prop\rightarrow 2^W$ is defined such that $V(p)=\{u,w,t\}$ and $V(q)=\{v,t\}$.
 
 \begin{table}[!ht]
     \centering
@@ -172,15 +172,15 @@ We define a model $\model=(W,P,V)$, where $W=\{u,v,w,t\}$, $P$ is the transition
     \label{prob_matrix}
 \end{table}
 
-As example, let us evaluate the formula $\Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$ at the state $w$:
+As an example, let us evaluate the formula $\Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$ at the state $w$:
 
 \smallskip
 
 $\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q) \ \iff \ \displaystyle\sum_{\{x\in W \ \mid \ \M,x\models p \vee \Diamond_{0.8} \ q\}} P(w, x) \geq 0.5.$
 
-Thus, for each state $x\in W$, we need to check whether $\model,x\models p \vee \Diamond_{0.8} \ q$, that holds if and only if $\model,x\models p$ or $\model,x\models \Diamond_{0.8} \ q$. Since $V(p)=\{u,w,t\}$, we only need to check the case $x=v$: 
+Thus, for each state $x\in W$, we need to check whether $\model,x\models p \vee \Diamond_{0.8} \ q$, which holds if and only if $\model,x\models p$ or $\model,x\models \Diamond_{0.8} \ q$. Since $V(p)=\{u,w,t\}$, we only need to check the case $x=v$: 
 
-$\model,v\models \Diamond_{0.8} \ q \ \iff \displaystyle\sum_{\{y \ \in W \ \mid \ \M,y\models \ q\}} P(v, y) \geq 0.8$.  According to the semantics, this is the case iff $P(v,v) + P(v,t) \geq 0.8$. But then we get $0.5 \geq 0.8$, that is false. \
+$\model,v\models \Diamond_{0.8} \ q \ \iff \displaystyle\sum_{\{y \ \in W \ \mid \ \M,y\models \ q\}} P(v, y) \geq 0.8$.  According to the semantics, this is the case iff $P(v,v) + P(v,t) \geq 0.8$. But then we get $0.5 \geq 0.8$, which is false. \
 
 Hence, $\displaystyle\sum_{\{x\in W \ \mid \ \M,x\models p \vee \Diamond_{0.8} \ q\}} P(w, x) \geq 0.5$ holds iff $P(w,w)+P(w,u) + P(w,t)\geq 0.5$, iff  $0.4 \geq 0.5$, which is false.
 
@@ -222,7 +222,7 @@ Therefore, $\M,w \not\models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$.
 
 We now introduce a definition of bisimulation for the basic probabilistic case. While the classical definition usually defines bisimulation as an equivalence relation over the states of a probabilistic Kripke model, we introduce a version here to relate two different probabilistic Kripke models.
 
-In \cite{Panangaden2011}, Panangaden studies probabilistic structures with labeled edges but without propositions. In that paper, the author introduces the definition of dynamic relation based on the work of Breugel \& Worrell \cite{BW01b,BW01a}, which does not require the relation to be an equivalence relation. Moreover, he proves that a dynamic relation implies the existence of a bisimulation relation. There, he was also able to prove the invariance and Hennessy-Milner theorem for finite models. Despite that paper considers a probabilistic Kripke structure with labels, we use it as the basis for our definition within a context that also considers propositions.
+Probabilistic structures with labeled edges but without propositions are studied in~\cite{Panangaden2011}. In that paper, the author introduces the definition of dynamic relation based on the work in~\cite{BW01b,BW01a}, which does not require the relation to be an equivalence relation. Moreover, he proves that a dynamic relation implies the existence of a bisimulation relation. There, he was also able to prove the invariance and Hennessy-Milner theorem for finite models. Although that paper considers a probabilistic Kripke structure with labels, we use it as the basis for our definition within a context that also considers propositions.
 
 \begin{definition}[Bisimulation]\label{bis} Let  $\M=(W,P, V)$ and  $\M' = (W', P', V')$ be two probabilistic Kripke models and $E \subseteq W \times W'$. We say that a nonempty relation $E$ is a \emph{bisimulation from $\M$ to $\M'$} if for every $w \in W$ and $w' \in W'$ such that $wEw'$, we have
 

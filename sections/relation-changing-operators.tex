@@ -1,6 +1,6 @@
 \section{Relation changing operators}\label{sec:prcml}
 
-This section presents our main contribution, which is defining novel logical languages which embed a relation-changing operator, interpreted over probabilistic Kripke structures. The languages extend those in e.g.~\cite{ShiraziA07,ALDINI2024109167}. 
+This section presents our main contribution, which is defining novel languages that extend probabilistic modal logic with a relation-changing modality, interpreted over probabilistic Kripke structures. The languages extend those in e.g.~\cite{ShiraziA07,ALDINI2024109167}. 
 The `update' modality (written generally $\blacklozenge_{\sigma}$ here) will have two possible interpretations. First, as a sabotage-like modality (see~\cite{Fervari14,ArecesFH15,Aucher&vanBenthem&Grossi18})
 in which the probability is subtracted from the edge accessing a chosen successor of the evaluation point, while it is transferred to another edge. Second, we introduce a bridge-like modality \cite{Fervari14,ArecesFH15}, in which the probability is instead taken from some edge to be added to the edge accessing the chosen successor. 
 
@@ -60,7 +60,7 @@ Note that  $\model^{-(w,v)}_\rho$ is a well-formed model, since it is updated in
 
 In the rest of the paper, we will denote  by $\model , u \equiv_s \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the sabotage semantics.
 
-The semantic interpretation of the sabotage operator describes a scenario in which the probability of the event represented by an edge is reduced. When that is the case, the probability of the remaining ones (that also leave from the same origin state) is increased, in order to guarantee that the probability of all leaving edges sums to 1. For each of these edges, the increase is proportional to their pre-existing probability, in order to preserve the likelihood of each one being crossed. This is illustrated in Example \ref{ex.sab}.
+The semantic interpretation of the sabotage operator describes a scenario in which the probability of the event represented by an edge is reduced. When that is the case, the probability of the remaining ones (that also leave from the same origin state) is increased, in order to guarantee that the probability of all leaving edges sums to 1. For each of these edges, the increase is proportional to their pre-existing probability, so that the relative probabilities of the other positive outgoing transitions are preserved. This is illustrated in Example \ref{ex.sab}.
 
 %Another question is, there exists a version of public announcements over this probabilistic logic with knowledge as in~\cite{ShiraziA07}?
 
@@ -94,7 +94,7 @@ $P(w,x)\geq 0.4$ implies $x=u$ or $x=v$. Although $v\not\in V(p)$, the formula i
 \end{figure}
 \end{example}
 
-In general we will need to deal with nested updates over the original probability matrix $P$ of a model $\model$. Thus, we need to make sure that such a sequence of updates over $P$ leads to a well-formed probablity matrix. We make these aspects precise in the following definition.
+In general we will need to deal with nested updates over the original probability matrix $P$ of a model $\model$. Thus, we need to make sure that such a sequence of updates over $P$ leads to a well-formed probability matrix. We make these aspects precise in the following definition.
 
 \begin{definition}[Sabotage well-formed]
     \label{def:sab-well-found}
