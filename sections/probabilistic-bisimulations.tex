@@ -18,32 +18,54 @@ We say that a non-empty relation $E\subseteq \big(W\times Prob(W)\big) \times \b
 
 %\item [$\mathbf{zag_{prob}:}$] for any $U' \subseteq W'$, $\displaystyle \sum_{u' \in U'} P'(w', u') \leq \displaystyle \sum_{(u,P)\in \bigcup_{u'\in U'}E^{-1}[(u',P')]} P(w, u)$;
 
-\item [\textbf{(sab-zig)}:] for any $u \in W$ s.t. $1\neq P(w, u)>\rho$, exists $u'\in W'$ such that:
-    \begin{enumerate}
-        \item $P(w, u) \leq P'(w', u')<1$, and 
-        \item $\big(u,P^{-(w,u)}_{\rho}\big)E\big(u',P'^{-(w',u')}_{\rho}\big)$;
-    \end{enumerate}
-
-\item [\textbf{(sab-zag)}:] for any $u' \in W'$ s.t. $1\neq P'(w', u')>\rho$, exists $u\in W$ such that: 
-    \begin{enumerate}
-        \item $P'(w', u') \leq P(w, u)<1$, and 
-        \item $\big(u,P^{-(w,u)}_{\rho}\big)E\big(u',P'^{-(w',u')}_{\rho}\big)$.
-    \end{enumerate}
+% \item [\textbf{(sab-zig)}:] for any $u \in W$ s.t. $1\neq P(w, u)>\rho$, exists $u'\in W'$ such that:
+%     \begin{enumerate}
+%         \item $P(w, u) \leq P'(w', u')<1$, and 
+%         \item $\big(u,P^{-(w,u)}_{\rho}\big)E\big(u',P'^{-(w',u')}_{\rho}\big)$;
+%     \end{enumerate}
+\item [\textbf{(sab-zig)}:] for any $u\in W$ s.t. $\rho\le P(w,u)\neq 1$, there is $u'\in W'$ s.t.    
+\begin{enumerate}
+    \item $\rho\le P'(w',u')\neq 1$ and 
+    \item $(u,P_\rho^{-(w,u)})E(u',P'^{-(w',u')}_\rho)$.  
+\end{enumerate}
+\item [\textbf{(sab-zag)}:] for any $u'\in W'$ s.t. $\rho\le P'(w',u')\neq 1$, there is $u\in W$ s.t.    
+\begin{enumerate}
+    \item $\rho\le P(w,u)\neq 1$ and 
+    \item $(u,P_\rho^{-(w,u)})E(u',P'^{-(w',u')}_\rho)$.  
+\end{enumerate}
+%
+% \item [\textbf{(sab-zag)}:] for any $u' \in W'$ s.t. $1\neq P'(w', u')>\rho$, exists $u\in W$ such that: 
+%     \begin{enumerate}
+%         \item $P'(w', u') \leq P(w, u)<1$, and 
+%         \item $\big(u,P^{-(w,u)}_{\rho}\big)E\big(u',P'^{-(w',u')}_{\rho}\big)$.
+%     \end{enumerate}
 \end{description}
 
 We say that $E$ is a $\rho$-bridge \emph{bisimulation from $\M$ to $\M'$} if, for every pair $\big((w,P) ,(w',P')\big)\in E$, \textbf{(atom)}, \textbf{(p-zigzag)} above and the following holds:
 
 \begin{description}
-    \item [\textbf{(br-zig)}:] for any $u \in W$ s.t. $P(w, u)+\rho<1$, exists $u'\in W'$ such that:
-    \begin{enumerate}
-        \item $P(w, u) \geq P'(w', u')$, and 
-        \item $\big(u,P^{+(w,u)}_{\rho}\big)E\big(u',P'^{+(w',u')}_{\rho}\big)$;
-    \end{enumerate} 
-    \item [\textbf{(br-zag)}:] for any $u' \in W'$ s.t. $P'(w', u')+\rho<1$, exists $u\in W$ such that: 
-    \begin{enumerate}
-        \item $P'(w', u') \geq P(w, u)$ and 
-        \item $\big(u,P^{+(w,u)}_{\rho}\big)E\big(u',P'^{+(w',u')}_{\rho}\big)$.
-    \end{enumerate}
+    % \item [\textbf{(br-zig)}:] for any $u \in W$ s.t. $P(w, u)+\rho<1$, exists $u'\in W'$ such that:
+    % \begin{enumerate}
+    %     \item $P(w, u) \geq P'(w', u')$, and 
+    %     \item $\big(u,P^{+(w,u)}_{\rho}\big)E\big(u',P'^{+(w',u')}_{\rho}\big)$;
+    % \end{enumerate} 
+    \item[(br-zig):]  for any $u\in W$ s.t. $P(w,u)+\rho\le 1$, there is $u'\in W'$ s.t.
+        \begin{enumerate}
+            \item $P'(w',u')+\rho\le 1$ and 
+            \item $(u,P_\rho^{+(w,u)})\,E\,(u',P'^{+(w',u')}_\rho)$.
+        \end{enumerate}
+    
+    \item[(br-zag):]  for any $u'\in W'$ s.t. $P(w',u')+\rho\le 1$, there is $u\in W$ s.t.
+        \begin{enumerate}
+            \item $P(w,u)+\rho\le 1$ and 
+            \item $(u,P_\rho^{+(w,u)})\,E\,(u',P'^{+(w',u')}_\rho)$.
+        \end{enumerate}
+
+    % \item [\textbf{(br-zag)}:] for any $u' \in W'$ s.t. $P'(w', u')+\rho<1$, exists $u\in W$ such that: 
+    % \begin{enumerate}
+    %     \item $P'(w', u') \geq P(w, u)$ and 
+    %     \item $\big(u,P^{+(w,u)}_{\rho}\big)E\big(u',P'^{+(w',u')}_{\rho}\big)$.
+    % \end{enumerate}
 
     % \item[\textbf{(univ):}] for all $w\in W, w'\in W'$, $E[\{(w,P)\}]\neq \emptyset \neq E^{-1}[\{(w',P')\}]$.
 \end{description}
@@ -51,19 +73,34 @@ We say that $E$ is a $\rho$-bridge \emph{bisimulation from $\M$ to $\M'$} if, fo
 Finally, $E$ is a $\rho$-swap \emph{bisimulation from $\M$ to $\M'$} if, for every pair $\big((w,P) ,(w',P')\big)\in E$, \textbf{(atom)}, \textbf{(p-zigzag)} above and the following holds:
 
 \begin{description}
-    \item [\textbf{(sw-zig)}:] for any $u \in W$ s.t. $\rho < P(w, u) \neq 1$ and $P(u,w) + \rho < 1$, exists $u'\in W'$ such that:
-    \begin{enumerate}
-        \item $P(w, u) \leq P'(w', u') < 1$, 
-        \item $P(u, w) \geq P'(u', w')$, and 
-        \item $\big(u,P^{*(w,u)}_{\rho}\big)E\big(u',P'^{*(w',u')}_{\rho}\big)$;
-    \end{enumerate} 
-    \item [\textbf{(sw-zag)}:] for any $u' \in W'$ s.t. $\rho < P'(w', u') \neq 1$ and $P'(u', w')+\rho<1$, exists $u\in W$ such that: 
-    \begin{enumerate}
-        \item $P'(w', u') \leq P(w, u) < 1$, 
-        \item $P'(u', w') \geq P(u, w)$ and 
-        \item $\big(u,P^{*(w,u)}_{\rho}\big)E\big(u',P'^{*(w',u')}_{\rho}\big)$.
-    \end{enumerate}
+    % \item [\textbf{(sw-zig)}:] for any $u \in W$ s.t. $\rho < P(w, u) \neq 1$ and $P(u,w) + \rho < 1$, exists $u'\in W'$ such that:
+    % \begin{enumerate}
+    %     \item $P(w, u) \leq P'(w', u') < 1$, 
+    %     \item $P(u, w) \geq P'(u', w')$, and 
+    %     \item $\big(u,P^{*(w,u)}_{\rho}\big)E\big(u',P'^{*(w',u')}_{\rho}\big)$;
+    % \end{enumerate} 
+
+    \item[(sw-zig):]  for any $u\in W$ s.t. $\rho\le P(w,u)\neq 1$ and $P(u,w)+\rho\le 1$, there is $u'\in W'$ s.t. 
+        \begin{enumerate}
+            \item $\rho\le P'(w',u')\neq 1$, $P'(u',w')+\rho\le 1$ and
+            \item $(u,P_\rho^{*(w,u)})\,E\,(u',P'^{*(w',u')}_\rho)$.
+        \end{enumerate}
+
+    \item[(sw-zag):]  for any $u'\in W'$ s.t. $\rho\le P(w',u')\neq 1$ and $P(u',w')+\rho\le 1$, there is $u\in W$ s.t. 
+        \begin{enumerate}
+            \item $\rho\le P(w,u)\neq 1$, $P(u,w)+\rho\le 1$ and
+            \item $(u,P_\rho^{*(w,u)})\,E\,(u',P'^{*(w',u')}_\rho)$.
+        \end{enumerate}
+    % \item [\textbf{(sw-zag)}:] for any $u' \in W'$ s.t. $\rho < P'(w', u') \neq 1$ and $P'(u', w')+\rho<1$, exists $u\in W$ such that: 
+    % \begin{enumerate}
+    %     \item $P'(w', u') \leq P(w, u) < 1$, 
+    %     \item $P'(u', w') \geq P(u, w)$ and 
+    %     \item $\big(u,P^{*(w,u)}_{\rho}\big)E\big(u',P'^{*(w',u')}_{\rho}\big)$.
+    % \end{enumerate}
+    
 \end{description}
+
+
 % \noindent In addition, for $\rho$-bridge bisimulation, we also impose that for all $w\in W, w'\in W'$, $E[\{(w,P)\}]\neq \emptyset \neq E^{-1}[\{(w',P')\}]$.
 
 We say that $E$ is a sabotage bisimulation (resp. bridge/swap bisimulation) if it is a $\rho$-sabotage  (resp. $\rho$-bridge/$\rho$-swap) bisimulation for every $\rho\in[0,1]$. Moreover, if $E$ is a bisimulation and $(w,P) E  (w',P')$, we say that $w$ and $w'$ are two sabotage (resp. bridge/swap) bisimilar states.
