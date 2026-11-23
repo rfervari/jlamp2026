@@ -207,7 +207,7 @@ In this section we will start by proving that the notions of bisimulation we jus
     %$\exists \ v'\in W' \mbox{ s.t. }  \ P'(w',v')\geq \rho, \mbox{ and } \model^{-(w',v')}_\rho, v' \models\varphi$ iff $\model',w'\models \blacklozenge_\rho \varphi$
 
    % The opposite implication is proved analogously.
-    The result for bridge semantics is obtained using the analogous reasoning.
+    The result for bridge semantics is obtained using the analogous reasoning. We prove only the case for formulas with the $\blacklozenge$ modality:
 
     % \begin{itemize}
     %     \item Suppose $\varphi=\blacklozenge_\rho\psi$ and $(W,{Q},V),w\models\blacklozenge_\rho\psi$. Then there is $v\in W$ such that
@@ -249,6 +249,9 @@ In this section we will start by proving that the notions of bisimulation we jus
         By IH, we get $(W',{Q}'^{+(w',v')}_\rho,V'),v'\models\psi$. 
         Therefore, we can conclude $(W',{Q}',V'),w'\models\blacklozenge_\rho\psi$. 
     \end{itemize}
+    The reciprocal implication is obtained analogously by using \textbf{(br-zag)}.
+
+
     It remains the verify that the result also holds under swap semantics:
     \begin{itemize}
             \item Suppose $\varphi=\blacklozenge_\rho\psi$ and $(W,{Q},V),w\models\blacklozenge_\rho\psi$. Then, there exists $v\in W$ such that
@@ -262,8 +265,9 @@ In this section we will start by proving that the notions of bisimulation we jus
             Thus, by IH, we obtain 
             $(W',{Q}'^{*(w',v')}_\rho,V'),v'\models\psi$. 
             Therefore, 
-                $(W',{Q}',V'),w'\models\blacklozenge_\rho\psi$.\qedhere
+                $(W',{Q}',V'),w'\models\blacklozenge_\rho\psi$.
         \end{itemize}
+         Once again, the reciprocal implication is obtained using \textbf{(sw-zag)}.
     % \begin{itemize}
     %     \item Suppose $\varphi=\blacklozenge_\rho\psi$ and $(W,{Q},V),w\models\blacklozenge_\rho\psi$. Then there is $v\in W$ such that
     %     \begin{itemize}
@@ -316,6 +320,8 @@ In this section we will start by proving that the notions of bisimulation we jus
 %\begin{theorem}[Invariance under bridge-bisimulation]\label{th:invariance-bridge}
  %   Let $\model=(W,R,V)$ and $\model'=(W',R',V')$ be two fuzzy Kripke models. If $\model,w\bridbisim\model',w'$, then  $\truthset{\varphi}{\model}{w} = \truthset{\varphi}{\model'}{w'}$, for every formula $\varphi\in\form_{br}$.
 %\end{theorem}
+
+We conclude this section with an example of relation-changing bisimulation and the use of our invariance theorems. 
 
 \begin{example}
 Let $\prop=\{p\}$ and consider the two probabilistic Kripke models, as shown in Fig. \ref{ex_r-bis}. We denote the model on the left by $\model=(W,P,V)$ and the one on the right by $\model'=(W',P',V')$, with $V(p)=\{u,v,x\}$ and $V'(p)=\{u',v',x',y'\}$.
@@ -372,20 +378,16 @@ Let $\prop=\{p\}$ and consider the two probabilistic Kripke models, as shown in 
 \end{figure}
 
 It is possible to verify that the following relation is a sabotage-bisimulation:
-
-$E=\{\big((w,P),(w',P')\big),$ $\big((z,P),(z',P')\big)\}$
-
-\hspace{0.4cm}$\cup \ \{(t,P)\times (t',P'): \ t\in\{u,v,x\}\text{ and }t'\in\{u',v',x',y'\}\}$
-
-\hspace{0.4cm}$\cup \ \{(z,P^{-(w,z)}_\rho)\times (z',P'^{-(w',z')}_\rho): \ \rho\in ]0,0.5]\}$
-
-\hspace{0.4cm}$\cup \ \{(t,P^{-(w,t)}_\rho)\times (u',P'^{-(w',u')}_\rho): \ t\in\{u,v\}\text{ and }\rho\in]0,0.2]\}$
-
-\hspace{0.4cm}$\cup \ \{(x,P^{-(w,x)}_\rho)\times (t',P'): \ t'\in\{v',x',y'\}\text{ and }\rho\in]0,0.1]\}$
-
-\medskip
-
-Therefore, $w$ is bisimilar to $w'$, $z$ is bisimilar to $z'$ and $u$, $v$, $x$ are bisimilar to $u'$, $v'$, $x'$, $y'$.
+    \[
+    \begin{array}{l@{\,}l}
+        E = & \{\big((w,P),(w',P')\big),$ $\big((z,P),(z',P')\big)\} \\ 
+            & \cup \ \{(t,P)\times (t',P'): \ t\in\{u,v,x\}\text{ and }t'\in\{u',v',x',y'\}\}\\
+            & \cup \ \{(z,P^{-(w,z)}_\rho)\times (z',P'^{-(w',z')}_\rho): \ \rho\in ]0,0.5]\}\\
+            &\cup \ \{(t,P^{-(w,t)}_\rho)\times (u',P'^{-(w',u')}_\rho): \ t\in\{u,v\}\text{ and }\rho\in]0,0.2]\}\\
+            & \cup \ \{(x,P^{-(w,x)}_\rho)\times (t',P'): \ t'\in\{v',x',y'\}\text{ and }\rho\in]0,0.1]\}
+    \end{array}
+    \]
+Therefore, $w$ is bisimilar to $w'$, $z$ is bisimilar to $z'$ and $u$, $v$, $x$ are bisimilar to $u'$, $v'$, $x'$, $y'$. Furthermore, the two models above satisfy the same sabotage formulas by Theorem~\ref{th:invariance}.
 
 \end{example}
 

@@ -5,7 +5,7 @@ We conclude by presenting a concrete application of our probabilistic relation-c
 
 Cells are often subjected to stress for various reasons, including viral infections, replication errors, and exposure to harmful chemicals. In response, cells attempt to repair the resulting damage and maintain their normal functioning. However, when repair is unsuccessful, cells may trigger apoptosis (programmed cell death).
 
-In this paper, we consider a simplified model of cellular dynamics in which DNA damage is caused by ionizing radiation, such as that associated with X-ray imaging procedures, leading to the occurrence of double-strand breaks (DSBs). In~\cite{ATHGM16}, the authors provide evidence that, even after the initial damage has been repaired, the accumulation of residual DSBs increases the likelihood of subsequent repair failure and, consequently, of apoptosis. Inspired by this case study, we propose a representative model (called hereafter $\model$) of these cellular dynamics, depicted in Figure~\ref{ex_apop}. We emphasize that this is not intended to be a biologically rigorous model: the probabilities assigned to the transitions are purely illustrative.
+In this paper, we consider a simplified model of cellular dynamics in which DNA damage is caused by ionizing radiation, such as that associated with X-ray imaging procedures, leading to the occurrence of double-strand breaks (DSBs). In~\cite{ATHGM16}, the authors provide evidence that, even after the initial damage has been repaired, the accumulation of residual DSBs increases the likelihood of subsequent repair failure and, consequently, of apoptosis. Inspired by this case study, we propose a deliberately simplified, illustrative transition model (called hereafter $\model$) of these cellular dynamics, depicted in Fig.~\ref{ex_apop}. We emphasize that this is not intended to be a biologically rigorous model: the probabilities assigned to the transitions are purely illustrative.
 
 \begin{figure}
 \centering
@@ -63,7 +63,7 @@ For instance, consider the formula $\Diamond_{0.3} A$, that holds whenever:
 
 \medskip
 
-Thus, one can check that $\M,d\not\models\Diamond_{0.3} A$, because the probability of going from state $damaged$ to $apoptosis$ is only 0.2 and $A$ holds at no other state.
+Thus, one can check that $\M,d\not\models\Diamond_{0.3} A$, because the probability of going from state $damaged$ to $apoptosis$ is only $0.2$ and $A$ holds at no other state.
 
 % However, consider the following formula, with $\blacklozenge$ being the probabilistic sabotage operator: 
 However, if we assume that after the cell repairs from a lesion, the probability of the cell to repair again and return to the healthy state reduces by $0.1$, we may consider the following formula, with $\blacklozenge$ being the probabilistic sabotage operator:
@@ -75,11 +75,11 @@ When evaluated at the state $damaged$, this formula expresses that:
 \medskip
 
 % \textit{If whenever a cell repairs from a DSB lesion, it reduces the probability of the cell to repair again and return to the $healthy$ state by 0.1 after a new lesion occurs, then when a new lesion occurs, the probability of apoptosis to be induced is now greater or equal than 0.3.}
-\textit{After repairing from a lesion, a cell may either remain healthy or suffer a new lesion that triggers apoptosis with a probability of at least $0.3$.}
+% \textit{After repairing from a lesion, a cell may either remain healthy or suffer a new lesion that triggers apoptosis with a probability of at least $0.3$.}
+
+\textit{There is an admissible repair update leading to a healthy state from which, with probability one, a cell may either remain healthy or suffer a new lesion that triggers apoptosis with a probability of at least $0.3$.}
 
 \medskip
-% \textit{The probability of successfully repairing a DSB lesion and returning to the $healthy$ state decreases by 0.1, while the probability of triggering apoptosis is at least 0.3.}
-
 
 Let us proceed to evaluate the formula at state $d$. To do so, let us define:
 \[
