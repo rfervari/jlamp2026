@@ -193,7 +193,7 @@ In this section we will start by proving that the notions of bisimulation we jus
         $(W',{Q}',V'),w'\models \Diamond_\rho \psi$.
 
         % \item If $\varphi= \blacklozenge_\rho \psi$, then $(W,{Q},V),w\models \blacklozenge_\rho \psi$ iff exists  $v\in W$ s.t.  $\rho\leq {Q}(w,v) < 1$,  and  $(W,{Q}^{-(w,v)}_\rho,V), v \models\psi$. From \textbf{(sab-zig)} in Def.~\ref{switch_bis}, there exists $v'\in W'$ s.t. ${Q}(w,v)\leq {Q}'(w',v') < 1$  and $(v,{Q}^{-(w,v)}_\rho)E(v',{Q}'^{-(w',v')}_\rho)$. Thus, by IH, exists $v'\in W'$, s.t. $\rho\leq {Q}'(w',v')<1$, and $(W',{Q}'^{-(w',v')}_\rho,V'), v' \models\psi$, and therefore $(W',{Q}',V'), w'\models\blacklozenge_\rho\psi$.
-        \item If $\varphi= \blacklozenge_\rho \psi$, then $(W,{Q},V),w\models \blacklozenge_\rho \psi$ iff exists  $v\in W$ s.t.  $\rho\leq {Q}(w,v) < 1$,  and  $(W,{Q}^{-(w,v)}_\rho,V), v \models\psi$. From \textbf{(sab-zig)} in Def.~\ref{switch_bis}, there exists $v'\in W'$ s.t. $\rho\leq {Q}'(w',v') \neq 1$  and $(v,{Q}^{-(w,v)}_\rho)E(v',{Q}'^{-(w',v')}_\rho)$. Thus, by IH, exists $v'\in W'$, s.t. $\rho\leq {Q}'(w',v')<1$, and $(W',{Q}'^{-(w',v')}_\rho,V'), v' \models\psi$, and therefore $(W',{Q}',V'), w'\models\blacklozenge_\rho\psi$.
+        \item Suppose $\varphi= \blacklozenge_\rho \psi$ and $(W,{Q},V),w\models \blacklozenge_\rho \psi$. Then, there exists  $v\in W$ such that  $\rho\leq {Q}(w,v) < 1$,  and  $(W,{Q}^{-(w,v)}_\rho,V), v \models\psi$. From \textbf{(sab-zig)} in Def.~\ref{switch_bis}, there exists $v'\in W'$ such that $\rho\leq {Q}'(w',v') \neq 1$  and $(v,{Q}^{-(w,v)}_\rho)E(v',{Q}'^{-(w',v')}_\rho)$. Thus, by IH, exists $v'\in W'$, s.t. $\rho\leq {Q}'(w',v')<1$, and $(W',{Q}'^{-(w',v')}_\rho,V'), v' \models\psi$, and therefore, we conclude that $(W',{Q}',V'), w'\models\blacklozenge_\rho\psi$.
 
         The reciprocal implication is proved analogously, using \textbf{(sab-zag)}.
     \end{itemize}
@@ -246,38 +246,51 @@ In this section we will start by proving that the notions of bisimulation we jus
         %     \leq{Q}(w,v')+\rho
         %     \leq 1.
         % \]
-        By the induction hypothesis, we get $(W',{Q}'^{+(w',v')}_\rho,V'),v'\models\psi$. 
+        By IH, we get $(W',{Q}'^{+(w',v')}_\rho,V'),v'\models\psi$. 
         Therefore, we can conclude $(W',{Q}',V'),w'\models\blacklozenge_\rho\psi$. 
     \end{itemize}
     It remains the verify that the result also holds under swap semantics:
-
     \begin{itemize}
-        \item Suppose $\varphi=\blacklozenge_\rho\psi$ and $(W,{Q},V),w\models\blacklozenge_\rho\psi$. Then there is $v\in W$ such that
-        \begin{itemize}
-            \item $\rho \leq {Q}(w,v) \neq 1$, 
-            \item ${Q}(v,w)+\rho\leq 1$, and
-            \item $(W,{Q}^{*(w,v)}_\rho,V),v\models\psi$.
+            \item Suppose $\varphi=\blacklozenge_\rho\psi$ and $(W,{Q},V),w\models\blacklozenge_\rho\psi$. Then, there exists $v\in W$ such that
+                $\rho \leq {Q}(w,v) \neq 1$, 
+                ${Q}(v,w)+\rho\leq 1$, and
+                $(W,{Q}^{*(w,v)}_\rho,V),v\models\psi$. 
+            By \textbf{(sw-zig)} in Def.~\ref{switch_bis}, there exists $v'\in W'$ such that
+               $\rho\le Q'(w',u')\neq 1$, $Q'(u',w')+\rho\le 1$ 
+                and 
+                $(v,{Q}^{*(w,v)}_\rho)E(v',{Q}'^{*(w',v')}_\rho)$. 
+            Thus, by IH, we obtain 
+            $(W',{Q}'^{*(w',v')}_\rho,V'),v'\models\psi$. 
+            Therefore, 
+                $(W',{Q}',V'),w'\models\blacklozenge_\rho\psi$.\qedhere
         \end{itemize}
-        By \textbf{(sw-zig)} in Def.~\ref{switch_bis}, there exists $v'\in W'$ such that
-        \begin{itemize}
-            \item ${Q}(w,v) \leq {Q}'(w',v') < 1$, 
-            \item ${Q}'(v',w') \leq {Q}(v,w) $, and
-            \item $(v,{Q}^{*(w,v)}_\rho)E(v',{Q}'^{*(w',v')}_\rho)$.
-        \end{itemize}
-        Then,
-        \begin{itemize}
-            \item $\rho \leq {Q}(w,v) \leq {Q}'(w',v') < 1$, and 
-            \item ${Q}'(v',w') + \rho \leq {Q}(v,w) + \rho \leq 1$.
-        \end{itemize}
-        By the induction hypothesis,
-        \[
-            (W',{Q}'^{*(w',v')}_\rho,V'),v'\models\psi.
-        \]
-        Therefore,
-        \[
-            (W',{Q}',V'),w'\models\blacklozenge_\rho\psi.
-        \]
-    \end{itemize}
+    % \begin{itemize}
+    %     \item Suppose $\varphi=\blacklozenge_\rho\psi$ and $(W,{Q},V),w\models\blacklozenge_\rho\psi$. Then there is $v\in W$ such that
+    %     \begin{itemize}
+    %         \item $\rho \leq {Q}(w,v) \neq 1$, 
+    %         \item ${Q}(v,w)+\rho\leq 1$, and
+    %         \item $(W,{Q}^{*(w,v)}_\rho,V),v\models\psi$.
+    %     \end{itemize}
+    %     By \textbf{(sw-zig)} in Def.~\ref{switch_bis}, there exists $v'\in W'$ such that
+    %     \begin{itemize}
+    %         \item ${Q}(w,v) \leq {Q}'(w',v') < 1$, 
+    %         \item ${Q}'(v',w') \leq {Q}(v,w) $, and
+    %         \item $(v,{Q}^{*(w,v)}_\rho)E(v',{Q}'^{*(w',v')}_\rho)$.
+    %     \end{itemize}
+    %     Then,
+    %     \begin{itemize}
+    %         \item $\rho \leq {Q}(w,v) \leq {Q}'(w',v') < 1$, and 
+    %         \item ${Q}'(v',w') + \rho \leq {Q}(v,w) + \rho \leq 1$.
+    %     \end{itemize}
+    %     By IH,
+    %     \[
+    %         (W',{Q}'^{*(w',v')}_\rho,V'),v'\models\psi.
+    %     \]
+    %     Therefore,
+    %     \[
+    %         (W',{Q}',V'),w'\models\blacklozenge_\rho\psi.
+    %     \]
+    % \end{itemize}
     %Here we note that the additional condition \textbf{(univ)} (i.e., for all $w\in W$,  $w'\in W'$, $E[\{(w,P)\}]\neq \emptyset \neq E^{-1}[\{(w',P')\}]$)  ensures that it is not possible to create a bridge to a new state that was not previously bisimilar to any other. This is not required for sabotage because the probability assigned to edges with probability of $0$ is never changed.
 \end{proof}
 
