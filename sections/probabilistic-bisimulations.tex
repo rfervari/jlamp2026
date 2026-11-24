@@ -152,7 +152,7 @@ In this section we will start by proving that the notions of bisimulation we jus
 \end{theorem}
 
 \begin{proof}
-    We prove the theorem by induction over the structure of formulas. Moreover, we will prove a more general result: for all well-formed matrices ${Q}$ and ${Q'}$, $(w,{Q})E(w',{Q}')$ implies $(W,{Q},V),w\equiv_{\mathsf{sb}}(W,{Q},V')',w'$.  
+    We prove the theorem by induction over the structure of formulas. Moreover, we will prove a more general result: for all well-formed matrices ${Q}$ and ${Q'}$, $(w,{Q})E(w',{Q}')$ implies $(W,{Q},V),w\equiv_{\mathsf{sb}}(W',{Q}',V'),w'$.  
     We firstly consider the sabotage semantics.
     
     \medskip
@@ -418,7 +418,7 @@ The two types of models will be relevant in our case. Such as it is done for non
 We will prove the relation given by:
 % \textcolor{blue}{RF: $\bar P$ and ${Q'}$ must all be image finite, to make sure that we always work with image finite models}
 \begin{align*}
-    E := & \{ ((u,{Q}),(u',{Q}')) \mid  (W,{Q},V), u \equiv_{\mathsf{sb}} (W,{Q}',V) , u ' \text{ and} \\
+    E := & \{ ((u,{Q}),(u',{Q}')) \mid  (W,{Q},V), u \equiv_{\mathsf{sb}} (W',{Q}',V') , u' \text{ and } \\
     & \text{ ${Q},{Q'}$ are well-formed for sabotage from $P,P'$ respectively} \} 
 \end{align*}
 is a sabotage bisimulation. Thus, for every $\big((w,{Q}) ,(w',{Q}')\big)\in E$, we have to prove that conditions \textbf{(atom)}, \textbf{(sab-zig)}, \textbf{(sab-zag)}, and \textbf{(p-zigzag)} hold. Notice that by Remark~\ref{rem:well-formed}, models whose underlying probability matrices are ${Q}$ and ${Q}'$, are image-finite models.
@@ -427,7 +427,7 @@ is a sabotage bisimulation. Thus, for every $\big((w,{Q}) ,(w',{Q}')\big)\in E$,
 \begin{description}
     \item[(atom):] follows immediately from definition of $E$. 
 
-    \item[\textbf{(sab-zig)}:] let $u \in W$ be such that $1 \neq {Q}(w,u) > \rho $. We have to prove that there exists $u'$ such that items 1 and 2 from \textbf{(sab-zig)} hold. Since ${Q}(w,u) \neq 1 $, we have that $(W,{Q},V), w \models \blacklozenge_{{Q}(w,u)} \top$. Thus, we also have that $(W',{Q}',V'), w' \models \blacklozenge_{{Q}(w,u)} \top$. Therefore, there exists $u' \in W'$ such that ${Q}(w,u) \leq {Q}'(w',u') < 1$, proving item 1. To prove item~2, we assume that for every $u' \in W'$, such that $ \rho \leq {Q}'(w', u') < 1$,  we have $\big(\big(u, {Q}_{\rho}^{-(w,u)}\big), \big(u', {Q}'^{-(w',u')}_{\rho}\big)\big) \notin E$. So, for each $u'$ there exists $\varphi'$ such that $(W,{Q}^{-(w,u)}_{\rho},V),u\models \varphi'$ and $(W',{Q}'^{-(w',u')}_{\rho},V'),u'\not\models \varphi'$. Since $(W',{Q}'^{-(w',u')}_{\rho},V')$ is image finite, we have only a finite set $\{u'_1,\dots,u'_n\}$ of worlds satisfying the condition. Thus there are $\{ \varphi_1,\dots,\varphi_n \}$ such that $(W,{Q}^{-(w,u)}_{\rho},V),u\models \varphi_i$ and $(W',\bar{P'_{\rho}}^{-(w',u'_i)},V'),u'_i\not\models \varphi_i$. Let us define $\varphi = \bigwedge \varphi_i$ and we get a contradiction because  $(W,{Q},V), w \models \blacklozenge_{\rho} \varphi$ but $(W',{Q}',V'), w' \not\models \blacklozenge_{\rho} \varphi$. Condition \textbf{(sab-zag)} follows in an analogous way.
+    \item[\textbf{(sab-zig)}:] let $u \in W$ be such that $\rho \leq {Q}(w,u) \neq 1$. We have to prove that there exists $u'$ such that items 1 and 2 from \textbf{(sab-zig)} hold. Since $\rho \neq 1 $, we have that $(W,{Q},V), w \models \blacklozenge_{\rho} \top$. Thus, we also have that $(W',{Q}',V'), w' \models \blacklozenge_{\rho} \top$. Therefore, there exists $u' \in W'$ such that $\rho \leq {Q}'(w',u') \neq 1$, proving item 1. To prove item~2, we assume that for every $u' \in W'$, such that $ \rho \leq {Q}'(w', u') < 1$,  we have $\big(\big(u, {Q}_{\rho}^{-(w,u)}\big), \big(u', {Q}'^{-(w',u')}_{\rho}\big)\big) \notin E$. So, for each $u'$ there exists $\varphi'$ such that $(W,{Q}^{-(w,u)}_{\rho},V),u\models \varphi'$ and $(W',{Q}'^{-(w',u')}_{\rho},V'),u'\not\models \varphi'$. Since $(W',{Q}'^{-(w',u')}_{\rho},V')$ is image finite, we have only a finite set $\{u'_1,\dots,u'_n\}$ of worlds satisfying the condition. Thus there are $\{ \varphi_1,\dots,\varphi_n \}$ such that $(W,{Q}^{-(w,u)}_{\rho},V),u\models \varphi_i$ and $(W',\bar{P'_{\rho}}^{-(w',u'_i)},V'),u'_i\not\models \varphi_i$. Let us define $\varphi = \bigwedge \varphi_i$ and we get a contradiction because  $(W,{Q},V), w \models \blacklozenge_{\rho} \varphi$ but $(W',{Q}',V'), w' \not\models \blacklozenge_{\rho} \varphi$. Condition \textbf{(sab-zag)} follows in an analogous way.
 
     \item[\textbf{(p-zigzag)}:] 
     let $U \subseteq W$ and set $\rho = \sum_{u \in U} {Q}(w,u)$. We define the following subsets of $W'$:
@@ -435,7 +435,7 @@ is a sabotage bisimulation. Thus, for every $\big((w,{Q}) ,(w',{Q}')\big)\in E$,
           U' &= \{ u' \in W'\mid \text{there exists } u\in U \text{ such that } (u',{Q}')\in E[(u,{Q})] \} \\
           T' &= W' \setminus U' 
     \end{align*}
-    Also we define $U_0 = \{u\in U \mid {Q}(w,u) > 0 \}$ and $T'_0 = \{u'\in T' \mid {Q}'(w',u') > 0\}$. Since the models are image finite, $U_0$ and $T'_0$ are finite. Take $u\in U_0$ and $v' \in T'_0$. Since $(v', {Q}') \notin E[(u,{Q})]$, there is $\varphi_{v'}^{u}\in\form $ such that $\bar{\model} , u \models \varphi_{v'}^{u}$ and $(W,{Q},V) , v' \not\models \varphi_{v'}^{u}$. Clearly, the formula
+    Also we define $U_0 = \{u\in U \mid {Q}(w,u) > 0 \}$ and $T'_0 = \{u'\in T' \mid {Q}'(w',u') > 0\}$. Since the models are image finite, $U_0$ and $T'_0$ are finite. Take $u\in U_0$ and $v' \in T'_0$. Since $(v', {Q}') \notin E[(u,{Q})]$, there is $\varphi_{v'}^{u}\in\form $ such that $(W,{Q},V) , u \models \varphi_{v'}^{u}$ and $(W',{Q}',V') , v' \not\models \varphi_{v'}^{u}$. Clearly, the formula
     \[
         \varphi = \bigvee_{u\in U_0} \bigwedge_{v'\in T'_0} \varphi_{v'}^{u}
     \]
@@ -492,14 +492,14 @@ We need to prove that, for  $\big((w,{Q}) ,(w',{Q}')\big)\in E$, conditions \tex
 
     % \item[(univ):] \textcolor{blue}{To be completed?}
 
-    \item[\textbf{(br-zig)}:] let $u \in W$ be such that ${Q}(w,u) + \rho < 1 $. We have to prove that there exists $u'$ such that items 1 and 2 from \textbf{(br-zig)} hold. Let $ \rho := 1 - {Q}(w,u) - \delta$ with $\delta > 0 $. It is easy to check that ${Q}(w,u) + \rho < 1 $, so $(W,{Q},V) , w \models \blacklozenge_{\rho} \top $. Since $\big((w,{Q}) ,(w',{Q}')\big)\in E$, we have that $(W',{Q},V') , w' \models \blacklozenge_{\rho} \top $, so there exists $u'$ such that ${Q}'(w',u') + \rho < 1$. Now,
-        \begin{align*}
-            {Q}'(w',u') + \rho &< 1 \\
-            {Q}'(w',u') + 1 - {Q}(w,u) - \delta &< 1 \\
-            {Q}'(w',u') &< {Q}(w,u) + \delta  
-        \end{align*}
-    Since it holds for every $\delta > 0$, we can take the limit as $\delta$ approaches zero, and we get ${Q}'(w',u') \leq  {Q}(w,u)$. So item 1 holds. Now, let us assume item 2 does not hold, i.e., for every $u'\in W'$ such that ${Q}'(w',u') + \rho < 1$, we have that $\big ( \big ( u, {Q}_{\rho}^{+(w,u)} \big ), \big ( u',{Q}'^{+(w',u')}_{\rho}\big )\big ) \notin E$. Therefore, for each $u'$ such that ${Q}'(w',u') + \rho < 1 $, there exists $\varphi_{u'}$ that satisfies that $(W,{Q},V) , u \models \varphi_u'$ and $(W',{Q},V') , u' \not \models \varphi_u'$. Since $W'$ is finite, we can define $\varphi = \blacklozenge_\rho \bigwedge \varphi_{u'}$. This yields a contradiction, since $(W,{Q},V) , w \models \varphi$ and $(W',{Q}',V') , w' \not \models \varphi$. Condition \textbf{(br-zag)} follows in an analogous way.
-
+    \item[\textbf{(br-zig)}:] let $u \in W$ be such that ${Q}(w,u) + \rho \leq 1 $. We have to prove that there exists $u'$ such that items 1 and 2 from \textbf{(br-zig)} hold. We can say that $(W,{Q},V) , w \models \blacklozenge_{\rho} \top $. Since $\big((w,{Q}) ,(w',{Q}')\big)\in E$, we have that $(W',{Q}',V') , w' \models \blacklozenge_{\rho} \top $, so there exists $u'$ such that ${Q}'(w',u') + \rho \leq 1$. So item 1 holds. Now, let us assume item 2 does not hold, i.e., for every $u'\in W'$ such that ${Q}'(w',u') + \rho \leq 1$, we have that $\big ( \big ( u, {Q}_{\rho}^{+(w,u)} \big ), \big ( u',{Q}'^{+(w',u')}_{\rho}\big )\big ) \notin E$. Therefore, for each $u'$ such that ${Q}'(w',u') + \rho \leq 1 $, there exists $\varphi_{u'}$ that satisfies that $(W,{Q},V) , u \models \varphi_u'$ and $(W',{Q}',V') , u' \not \models \varphi_u'$. Since $W'$ is finite, we can define $\varphi = \blacklozenge_\rho \bigwedge \varphi_{u'}$. This yields a contradiction, since $(W,{Q},V) , w \models \varphi$ and $(W',{Q}',V') , w' \not \models \varphi$. Condition \textbf{(br-zag)} follows in an analogous way.
+    %     \begin{align*}
+    %         {Q}'(w',u') + \rho &< 1 \\
+    %         {Q}'(w',u') + 1 - {Q}(w,u) - \delta &< 1 \\
+    %         {Q}'(w',u') &< {Q}(w,u) + \delta  
+    %     \end{align*}
+    % Since it holds for every $\delta > 0$, we can take the limit as $\delta$ approaches zero, and we get ${Q}'(w',u') \leq  {Q}(w,u)$. 
+    
     \item[\textbf{(p-zigzag)}:] For $U \subseteq W$, let $\rho = \sum_{u \in U} {Q}(w,u)$. Define the following sets:
         \begin{align*}
             U' &= \{ u' \in W' \mid \text{there exists } u\in U \text{ such that } (u',{Q}')\in E[(u,{Q})] \} \\
