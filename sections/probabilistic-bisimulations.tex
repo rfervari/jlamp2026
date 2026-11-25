@@ -394,23 +394,25 @@ Therefore, $w$ is bisimilar to $w'$, $z$ is bisimilar to $z'$ and $u$, $v$, $x$ 
 \subsection{Hennessy-Milner Results}
 \label{sec:henmilner}
 
-In this section, we will devote ourselves to the proof of Hennessy-Milner results~\cite{vanbenthem1977modal}. Concretely, we will show that under certain circumstances, the converse of Theorem~\ref{th:invariance} holds. As it is usual in modal logics, these conditions involve some finiteness constraint, namely image finiteness or finite models. Below we define classes of models satisfying those conditions, called in general \emph{Hennessy-Milner classes} (see, e.g.,~\cite{BlackburnRV01}).
+In this section, we will devote ourselves to the proof of Hennessy-Milner results~\cite{vanbenthem1977modal}. Concretely, we will show that under certain circumstances, the converse of Theorem~\ref{th:invariance} holds for the respective logics. As it is usual in modal logics, these conditions involve some finiteness constraint, namely image finiteness or finite models (see Definition~\ref{def:image-finite}). Classes of models in which bisimulation and logical equivalence coincide, are in general called \emph{Hennessy-Milner classes} (see, e.g.,~\cite{BlackburnRV01}). 
 
-
-\begin{definition}
-    \label{def:image-finite}
-A model $\model=(W,P,V)$ is \emph{image finite} if for all $w\in W$, we have that the set $\{v \in W \mid P(w,v)>0\}$ is finite. We say that $\model$ is \emph{finite} if its set of states $W$ is finite.
-\end{definition}
+% \begin{definition}
+%     \label{def:image-finite}
+% A model $\model=(W,P,V)$ is \emph{image finite} if for all $w\in W$, we have that the set $\{v \in W \mid P(w,v)>0\}$ is finite. We say that $\model$ is \emph{finite} if its set of states $W$ is finite.
+% \end{definition}
 %
+
+The two types of models from Definition~\ref{def:image-finite} will be relevant in our case. Such as it is done for non-probabilistic sabotage and swap in~\cite{ArecesFH15}, image finite suffices to obtain a Hennessy-Milner class. However, this is not the case for bridge, as in infinite model, there exist  infinitely many possible new edges that can be added. In our probabilistic setting, this situation naturally persists. The following remark establishes a property that will be crucial in proving our result.
+
 \begin{remark}\label{rem:well-formed}
    Let $\model=(W,P,V)$ be an image finite probabilistic Kripke model.  Then, for all ${Q}$ that is well-formed from $P$ for sabotage, we have that $\model=(W,{Q},V)$ is also image finite.
 \end{remark}
 
-The two types of models will be relevant in our case. Such as it is done for non-probabilistic sabotage in~\cite{ArecesFH15}, image finite suffices to obtain a Hennessy-Milner class. However, this is not the case for bridge, as in infinite model, there exist  infinitely many possible new edges that can be added. In our probabilistic setting, this situation naturally persists.
-
+Then, we can prove that image finite models form a Hennessy-Milner class for sabotage.
 
 \begin{theorem}
     [Hennessy-Milner for sabotage]
+    \label{th:hm-sab}
      Let $\model=(W,P,V)$ and $\model'=(W',P',V')$ be two image finite probabilistic Kripke models. Let ${Q},{Q'}$ be two well-formed probabilistic matrices for sabotage w.r.t. $P,P'$ respectively.  
     Then, $(W,{Q},V),w\equiv_{\mathsf{sb}}(W',{Q}',V'),w'$ implies there exists a sabotage bisimulation $E$ such that $(w,{Q})E(w',{Q}')$.
 \end{theorem}
@@ -515,6 +517,10 @@ We need to prove that, for  $\big((w,{Q}) ,(w',{Q}')\big)\in E$, conditions \tex
 
 
 We finish this section with the corresponding Hennessy-Milner result under swap semantics. 
+
+\begin{remark}\label{rem:well-formed-swap}
+   Let $\model=(W,P,V)$ be an image finite probabilistic Kripke model.  Then, for all ${Q}$ that is well-formed from $P$ for swap, we have that $\model=(W,{Q},V)$ is also image finite.
+\end{remark}
 
 \begin{theorem}
     [Hennessy-Milner for swap]

@@ -274,11 +274,22 @@ Probabilistic structures with labeled edges but without propositions are studied
     Therefore, combining \eqref{eq:zagzig+zigzag}, \eqref{eq:first_part} and \eqref{eq:second_part} we get a contradiction.
 \end{remark}
 
-With this definition at hand, we are able to prove the following characterization result, usually called the \emph{invariance under bisimulation theorem}.
+Before proceeding let us introduce two classes of models that will be of interest in the rest of the paper. Concretely, we will show that over these classes, bisimulation and logical equivalence for different logics coincide.
 
-\begin{theorem}\label{th:inv_prob} Let  $\M=(W,P, V)$ and $\M' = (W', P', V')$ be two probabilistic Kripke models and $E \subseteq W \times W'$ a bisimulation from $\M$ to $\M'$. Then for any $(w,w')\in E$ and any formula $\varphi$ we have  $$\M,w \models \varphi \text{ iff } \M',w' \models \varphi$$
+\begin{definition}
+    \label{def:image-finite}
+A model $\model=(W,P,V)$ is \emph{image finite} if for all $w\in W$, we have that the set $\{v \in W \mid P(w,v)>0\}$ is finite. We say that $\model$ is \emph{finite} if its set of states $W$ is finite.
+\end{definition}
+
+With these definitions at hand, we are able to prove the following characterization result, usually called the \emph{invariance under bisimulation} and \emph{Hennessy-Milner} theorems.
+
+\begin{theorem}\label{th:inv_prob} Let  $\M=(W,P, V)$ and $\M' = (W', P', V')$ be two probabilistic Kripke models and $E \subseteq W \times W'$ a bisimulation from $\M$ to $\M'$. Then for any $(w,w')\in E$ and any formula $\varphi$ we have  
+\[  
+    \M,w \models \varphi \text{ iff } \M',w' \models \varphi.
+\]
+Moreover, if $\M$ and $\M'$ are image finite, then the converse also holds.
 \end{theorem}
 
 \begin{proof}
-    The proof is obtained as a fragment of the proof of Theorem \ref{th:invariance}, that will be presented later on the paper.
+    The proof is obtained as a fragment of the proofs of Theorems~\ref{th:invariance} and \ref{th:hm-sab}, that will be presented later on the paper.
 \end{proof}
