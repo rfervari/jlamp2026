@@ -141,19 +141,24 @@ where $\model^{+(w,v)}_\rho = (W, P^{+(w,v)}_\rho,V)$, with:
     \item $P^{+(w,v)}_\rho(s,t)=P(s,t)$, if $s\neq w$.
 \end{itemize}
 
-Again, note that $\model^{+(w,v)}_\rho$ is a well-formed model.
+Again, note that $\model^{+(w,v)}_\rho$ is a well-formed probabilistic Kripke model.
+\end{definition}
 
 In what follows, we will denote  by $\model , u \equiv_{\mathsf{br}} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the bridge semantics.
 
-\end{definition}
+\medskip
 
 The semantics of the bridge operator depicts a case where either the probability of an event to occur increases or some new transition is possible. Thus, the probability assigned to the other edges that also leave from the same origin state must decrease. As in the case of the ``sabotage'', this reduction is obtained in a proportional way, based on the previous value of each edge probability. This is illustrated in Example \ref{ex:brid}.
 
 \begin{example}\label{ex:brid}
-Let us recall the model $(W,P,V)$ from Example \ref{ex1} and check if $v$ satisfies $\blacklozenge_{0.4} q$. By the semantics we have 
-$\model,v\models\blacklozenge_{0.4} q$ iff $\exists x\in W$ s.t. $0.4\leq \ P(v,x)\neq 1$,  and $\model^{+(v,x)}_{0.4}, x \models q$.
+Let us recall the model $(W,P,V)$ from Example \ref{ex1} and check whether $\model,v\models\blacklozenge_{0.4} q$. By the semantics we have 
+\[
+\model,v\models\blacklozenge_{0.4} q \ \ \iff \ \ \text{exists } x\in W \text{ s.t. }P(v,x)+0.4 \leq 1,  \text{ and } \model^{+(v,x)}_{0.4}, x \models q.
+\]
 
-$P(v,x)\leq 0.4$ implies $x=w$ or $x=t$. Although $w\not\in V(p)$, the formula is satisfied because $\model^{+(v,t)}_{0.4}, t \models p$. Moreover, the model $\model^{+(v,t)}_{0.4}=(W,P^{+(v,t)}_{0.4},V)$ is illustrated in Fig. \ref{fig:bridge}.
+We can take $x=t$, and since $P(w,t)+0.4 = 0.4\leq 1$ and $t\in V(q)$ (and thus $\model^{+(v,t)}_{0.4}, t \models q$), we get $\model,v\models\blacklozenge_{0.4} q$.
+%$P(v,x)+0.4\leq 1$ implies $x=w$ or $x=t$. Although $w\not\in V(p)$, the formula is satisfied because $\model^{+(v,t)}_{0.4}, t \models p$. Moreover, 
+The model $\model^{+(v,t)}_{0.4}=(W,P^{+(v,t)}_{0.4},V)$ is illustrated in Fig.~\ref{fig:bridge}.
 
 \begin{figure}[!ht]
     \centering
@@ -228,10 +233,50 @@ where $\model^{*(w,v)}_\rho = (W, P^{*(w,v)}_\rho,V)$, with:
 \end{itemize}
 
 Again, note that $\model^{*(w,v)}_\rho$ is a well-formed model.
+\end{definition}
 
 In what follows, we will denote  by $\model , u \equiv_{\mathsf{sw}} \model' , u'$ whenever $\model , u \models \varphi$ iff $\model' , u' \models \varphi$ for all $\varphi \in \form $ with the swap semantics.
 
-\end{definition}
+\medskip
+
+The effect of a swap modality is to transfer the probability of an edge $(w,v)$ to its converse $(w,v)$, by adapting both the probabilities of the rest of the successors from the evaluation point $w$ (similar to what is done in sabotage) and that of the successors of $v$ (similarly to what is done in bridge). Example~\ref{ex:swap} illustrates this situation.
+
+\begin{example}\label{ex:swap}
+Consider once again the model $(W,P,V)$ from Example~\ref{ex1}. We want to check whether $\model,v\models\blacklozenge_{0.4} \neg p$. By the semantics we have 
+\[
+\begin{array}{lcl}
+\model,w\models\blacklozenge_{0.5} \neg p  &  \iff & \text{ exists } x\in W \text{ s.t. } 0.5 \leq P(w,x) \neq 1,\ P(x,w)+0.5 \leq 1,  \\ 
+& & \ \ \text{ and } \model^{+(v,x)}_{0.5}, x \models \neg p.
+\end{array}
+\]
+We can take $x=v$, as $0.5\leq P(w,v)=0.6 \neq 1$ and $P(v,w)+0.5= 0.5 \leq 1$. Moreover, $\model^{+(v,t)}_{0.4}, v\models \neg p$, since $v\notin V(p)$ Thus, we get $\model,v\models\blacklozenge_{0.5} \neg p$.
+%$P(v,x)+0.4\leq 1$ implies $x=w$ or $x=t$. Although $w\not\in V(p)$, the formula is satisfied because $\model^{+(v,t)}_{0.4}, t \models p$. Moreover, 
+The model $\model^{*(w,v)}_{0.5}=(W,P^{+(v,t)}_{0.5},V)$ is illustrated in Fig.~\ref{fig:swap}.
+
+\begin{figure}[!ht]
+    \centering
+        \begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm]
+        
+        % Nodes
+        \node[circle,draw] (w) {$w$};
+        \node[circle,draw,below left of=w] (u) {$u$};
+        \node[circle,draw,below right of=w] (v) {$v$};
+        \node[circle,draw,below of=w] (t) {$t$};
+        
+        % Edges
+        \path (w) edge node[left,blue] {$0.9$} (u)
+              (w) edge node[right,red] {\footnotesize $0.1$} (v)
+              (u) edge node[below left] {\small $1$} (t)
+              (v) edge node[above left,red] {\footnotesize $0.25$} (u)
+              (v) edge [loop right] node[red] {\small $0.25$} (v)
+              (t) edge [loop below] node {$1$} (t);
+           \path (v) edge[bend left] node[left,blue] {\footnotesize $0.5$} (w);
+        \end{tikzpicture}
+    \caption{The probabilistic Kripke model $(W,P^{*(w,v)}_{0.4},V)$.}
+    \label{fig:swap}
+\end{figure}
+\end{example}
+
 
 Again, we need to establish when a sequence of updates is well-formed.
 
