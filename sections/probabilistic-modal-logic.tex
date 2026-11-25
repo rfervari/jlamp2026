@@ -110,11 +110,11 @@ The set of formulas is defined recursively as:
 \[
 \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \Diamond_\rho \varphi,
 \]
-where $p\in\prop$ and $\rho \in [0,1]$. We assume other Boolean operators are defined in a usual way.
+where $p\in\prop$ and $\rho \in [0,1]$. We assume other Boolean operators are defined in the usual way.
 \end{definition}
 
 \begin{definition}[Satisfaction]
-Let $\M = (W, P, V)$ be a probabilistic Kripke structure, and let $w$ be a state in $W$. For any probabilistic modal logic formula~$\varphi$, we define 
+Let $\M = (W, P, V)$ be a probabilistic Kripke structure, and let $w\in W$. For any probabilistic modal logic formula $\varphi$, we define 
 the satisfaction relation $\models$ recursively as follows:
 %$\operatorname{val}(s, \varphi)$ recursively as follows:
 
@@ -128,10 +128,8 @@ the satisfaction relation $\models$ recursively as follows:
 \]
 \end{definition}
 
-\medskip
-
 \begin{example}\label{ex1}
-To illustrate how the satisfaction is evaluated on a probabilistic Kripke model, consider the structure depicted in Fig. \ref{fig:classic}.
+To illustrate how the satisfaction of formulas is evaluated on a probabilistic Kripke model, consider the structure $\model$ depicted in Fig.~\ref{fig:classic}.
 
 \begin{figure}[!ht]
     \centering
@@ -156,7 +154,7 @@ To illustrate how the satisfaction is evaluated on a probabilistic Kripke model,
     \label{fig:classic}
 \end{figure}
 
-Let $\prop=\{p,q\}$, we define a model $\model=(W,P,V)$ where  $W=\{u,v,w,t\}$, $P$ is the transition probability matrix depicted in Table~\ref{prob_matrix} and $V: \prop\rightarrow 2^W$ is defined such that $V(p)=\{u,w,t\}$ and $V(q)=\{v,t\}$.
+Let $\prop=\{p,q\}$, $\model$ is formally defined as the tuple $(W,P,V)$, where $W=\{u,v,w,t\}$, $P$ is the transition probability matrix depicted in Table~\ref{prob_matrix} and $V: \prop\rightarrow 2^W$ is defined such that $V(p)=\{u,w,t\}$ and $V(q)=\{v,t\}$.
 
 \begin{table}[!ht]
     \centering
@@ -172,19 +170,54 @@ Let $\prop=\{p,q\}$, we define a model $\model=(W,P,V)$ where  $W=\{u,v,w,t\}$, 
     \label{prob_matrix}
 \end{table}
 
-As an example, let us evaluate the formula $\Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$ at the state $w$:
+We want to decide whether $\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8}\, q)$.
+By the semantics of $\Diamond_\rho$,
+\[
+\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8}\, q)
+\iff
+\sum_{\{x\in W \,\mid\, \M,x\models p \vee \Diamond_{0.8}\, q\}} P(w,x) \geq 0.5 .
+\]
+So we first determine which states satisfy $p \vee \Diamond_{0.8}\, q$, that is,
+which states satisfy $p$ or satisfy $\Diamond_{0.8}\, q$.
 
-\smallskip
+\medskip
+Since $V(p)=\{u,w,t\}$, the states $u$, $w$ and $t$ satisfy $p \vee \Diamond_{0.8}\, q$.
+It remains to check the state $v$.
 
-$\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q) \ \iff \ \displaystyle\sum_{\{x\in W \ \mid \ \M,x\models p \vee \Diamond_{0.8} \ q\}} P(w, x) \geq 0.5.$
+\medskip
+Since $v\notin V(p)$, we have $\M,v\models p \vee \Diamond_{0.8}\, q$ if and only if
+$\M,v\models \Diamond_{0.8}\, q$, which holds if and only if
+\[
+\sum_{\{y\in W \,\mid\, \M,y\models q\}} P(v,y) \geq 0.8 .
+\]
+Since $V(q)=\{v,t\}$, this sum is $P(v,v)+P(v,t)=0.5+0=0.5$, and
+$0.5\geq 0.8$ is false. Hence $\M,v\not\models p \vee \Diamond_{0.8}\, q$.
 
-Thus, for each state $x\in W$, we need to check whether $\model,x\models p \vee \Diamond_{0.8} \ q$, which holds if and only if $\model,x\models p$ or $\model,x\models \Diamond_{0.8} \ q$. Since $V(p)=\{u,w,t\}$, we only need to check the case $x=v$: 
+\medskip
+By putting those facts together, the states satisfying $p \vee \Diamond_{0.8}\, q$ are exactly
+$u$, $w$ and $t$. Therefore
+\[
+\begin{array}{ll}
+& \sum_{\{x\in W \,\mid\, \M,x\models p \vee \Diamond_{0.8}\, q\}} P(w,x) \geq 0.5 \\
+\iff &  P(w,w)+P(w,u)+P(w,t) \geq 0.5 \\
+\iff & 0+0.4+0 \geq 0.5,
+\end{array}
+\]
+which is false. Therefore, $\M,w \not\models \Diamond_{0.5}(p \vee \Diamond_{0.8} q)$.
 
-$\model,v\models \Diamond_{0.8} \ q \ \iff \displaystyle\sum_{\{y \ \in W \ \mid \ \M,y\models \ q\}} P(v, y) \geq 0.8$.  According to the semantics, this is the case iff $P(v,v) + P(v,t) \geq 0.8$. But then we get $0.5 \geq 0.8$, which is false. \
+% As an example, let us evaluate the formula $\Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$ at the state $w$:
 
-Hence, $\displaystyle\sum_{\{x\in W \ \mid \ \M,x\models p \vee \Diamond_{0.8} \ q\}} P(w, x) \geq 0.5$ holds iff $P(w,w)+P(w,u) + P(w,t)\geq 0.5$, iff  $0.4 \geq 0.5$, which is false.
+% \smallskip
 
-Therefore, $\M,w \not\models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$.
+% $\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q) \ \iff \ \displaystyle\sum_{\{x\in W \ \mid \ \M,x\models p \vee \Diamond_{0.8} \ q\}} P(w, x) \geq 0.5.$
+
+% Thus, for each state $x\in W$, we need to check whether $\model,x\models p \vee \Diamond_{0.8} \ q$, which holds if and only if $\model,x\models p$ or $\model,x\models \Diamond_{0.8} \ q$. Since $V(p)=\{u,w,t\}$, we only need to check the case $x=v$: 
+
+% $\model,v\models \Diamond_{0.8} \ q \ \iff \displaystyle\sum_{\{y \ \in W \ \mid \ \M,y\models \ q\}} P(v, y) \geq 0.8$.  According to the semantics, this is the case if and only if $P(v,v) + P(v,t) \geq 0.8$. But then we get $0.5 \geq 0.8$, which is false. \
+
+% Hence, $\displaystyle\sum_{\{x\in W \ \mid \ \M,x\models p \vee \Diamond_{0.8} \ q\}} P(w, x) \geq 0.5$ holds if and only if $P(w,w)+P(w,u) + P(w,t)\geq 0.5$, if and only if  $0.4 \geq 0.5$, which is false.
+
+% Therefore, $\M,w \not\models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$.
 
 \end{example}
 
@@ -222,22 +255,21 @@ Therefore, $\M,w \not\models \Diamond_{0.5}(p \vee \Diamond_{0.8} \ q)$.
 
 We now introduce a definition of bisimulation for the basic probabilistic case. While the classical definition usually defines bisimulation as an equivalence relation over the states of a probabilistic Kripke model, we introduce a version here to relate two different probabilistic Kripke models.
 
-Probabilistic structures with labeled edges but without propositions are studied in~\cite{Panangaden2011}. In that paper, the author introduces the definition of dynamic relation based on the work in~\cite{BW01b,BW01a}, which does not require the relation to be an equivalence relation. Moreover, he proves that a dynamic relation implies the existence of a bisimulation relation. There, he was also able to prove the invariance and Hennessy-Milner theorem for finite models. Although that paper considers a probabilistic Kripke structure with labels, we use it as the basis for our definition within a context that also considers propositions.
+In~\cite{Panangaden2011}, Panangaden studies probabilistic structures with labeled edges but without propositions. There, the author introduces the notion of a dynamic relation, based on the work of van Breugel and Worrell~\cite{BW01b,BW01a}, which is not required to be an equivalence relation. He also proves that the existence of a dynamic relation implies the existence of a bisimulation, and obtains the invariance and Hennessy-Milner theorems for finite models. Although that paper does not consider propositions, we use it as the basis for our definition in a setting that does.
 
-\begin{definition}[Bisimulation]\label{bis} Let  $\M=(W,P, V)$ and  $\M' = (W', P', V')$ be two probabilistic Kripke models and $E \subseteq W \times W'$. We say that a nonempty relation $E$ is a \emph{bisimulation from $\M$ to $\M'$} if for every $w \in W$ and $w' \in W'$ such that $wEw'$, we have
-
+\begin{definition}[Bisimulation]\label{bis} Let  $\M=(W,P, V)$ and  $\M' = (W', P', V')$ be two probabilistic Kripke models. We say that a nonempty relation $E\subseteq W\times W'$ is a \emph{bisimulation from $\M$ to $\M'$} if for every $w \in W$ and $w' \in W'$ such that $wEw'$, the following conditions hold:
 \begin{description}
     \item[(atom):] for any $p \in \prop$, $w\in V(p)$ iff $w'\in V'(p)$,
-    \item[(p-zigzag):] for any $U \subseteq W$, $\displaystyle \sum_{u \in U} P(w, u) \leq \displaystyle \sum_{u' \in E[U]} P'(w', u')$
+    \item[(p-zigzag):] for any $U \subseteq W$, $\displaystyle \sum_{u \in U} P(w, u) \leq \displaystyle \sum_{u' \in E[U]} P'(w', u')$.
 \end{description}
 \end{definition}
 
 \begin{remark}
-    Observe that the condition \textbf{(p-zigzag)} entails also its mirror condition \textbf{(p-zigzag')}. To prove this, let us consider a set $U'\subseteq W'$ and aiming for a contradiction assume that the following inequality holds:
+    Observe that the condition \textbf{(p-zigzag)} entails also its mirror condition \textbf{(p-zigzag')}. To prove this, let us consider a set $U'\subseteq W'$ and, aiming for a contradiction, assume that the following inequality holds:
     \begin{equation} \label{eq:zagzig}
         \displaystyle \sum_{u' \in U'} P'(w', u') > \displaystyle \sum_{ u  \in  E^{-1}[U']} P(w, u)
     \end{equation}
-    We define $T := W \setminus E^{-1}[U']$ and observe that if $v'\in E[T]$ then $v'\notin U'$, so $U'$ and $E[T]$ are disjoint. 
+    We define $T := W \setminus E^{-1}[U']$ and observe that if $v'\in E[T]$ then $v'\notin U'$, so $U'\cap E[T]=\emptyset$. 
 
     The condition \textbf{(p-zigzag)} for $T$ establishes that:
     \begin{equation} \label{eq:zigzag}
@@ -262,7 +294,7 @@ Probabilistic structures with labeled edges but without propositions are studied
         =
         1
     \end{equation}
-    Based on the observation that $U'$ and $E[T]$ are disjoint, we can conclude that:
+    Based on the observation that $U'$ and $E[T]$ are disjoint ($U'\cap E[T]=\emptyset$), we can conclude that:
     \begin{equation}
         \label{eq:second_part}
         \displaystyle \sum_{ v' \in  E[T]} P'(w', v')
