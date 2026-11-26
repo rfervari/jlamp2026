@@ -170,35 +170,32 @@ Let $\prop=\{p,q\}$, $\model$ is formally defined as the tuple $(W,P,V)$, where 
     \label{prob_matrix}
 \end{table}
 
-We want to decide whether $\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8}\, q)$.
-By the semantics of $\Diamond_\rho$,
+We want to decide whether $\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8} q)$.
+By the semantics of~$\Diamond_\rho$,
 \[
-\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8}\, q)
-\iff
+\M,w \models \Diamond_{0.5}(p \vee \Diamond_{0.8} q)
+\ \iff \ 
 \sum_{\{x\in W \,\mid\, \M,x\models p \vee \Diamond_{0.8}\, q\}} P(w,x) \geq 0.5 .
 \]
-So we first determine which states satisfy $p \vee \Diamond_{0.8}\, q$, that is,
-which states satisfy $p$ or satisfy $\Diamond_{0.8}\, q$.
+So we first determine which states satisfy $p \vee \Diamond_{0.8} q$, that is,
+which states satisfy $p$ or satisfy $\Diamond_{0.8} q$.
 
-\medskip
-Since $V(p)=\{u,w,t\}$, the states $u$, $w$ and $t$ satisfy $p \vee \Diamond_{0.8}\, q$.
+Since $V(p)=\{u,w,t\}$, $\M,x\models p \vee \Diamond_{0.8} q$ if $x\in\{u,w,t\}$. 
 It remains to check the state $v$.
 
-\medskip
-Since $v\notin V(p)$, we have $\M,v\models p \vee \Diamond_{0.8}\, q$ if and only if
+Since $v\notin V(p)$, we have $\M,v\models p \vee \Diamond_{0.8} q$ if and only if
 $\M,v\models \Diamond_{0.8}\, q$, which holds if and only if
 \[
 \sum_{\{y\in W \,\mid\, \M,y\models q\}} P(v,y) \geq 0.8 .
 \]
 Since $V(q)=\{v,t\}$, this sum is $P(v,v)+P(v,t)=0.5+0=0.5$, and
-$0.5\geq 0.8$ is false. Hence $\M,v\not\models p \vee \Diamond_{0.8}\, q$.
+$0.5\geq 0.8$ is false. Hence $\M,v\not\models p \vee \Diamond_{0.8} q$.
 
-\medskip
-By putting those facts together, the states satisfying $p \vee \Diamond_{0.8}\, q$ are exactly
+By putting those facts together, the states satisfying $p \vee \Diamond_{0.8} q$ are exactly
 $u$, $w$ and $t$. Therefore
 \[
 \begin{array}{ll}
-& \sum_{\{x\in W \,\mid\, \M,x\models p \vee \Diamond_{0.8}\, q\}} P(w,x) \geq 0.5 \\
+& \sum_{\{x\in W \mid \M,x\models p \vee \Diamond_{0.8} q\}} P(w,x) \geq 0.5 \\
 \iff &  P(w,w)+P(w,u)+P(w,t) \geq 0.5 \\
 \iff & 0+0.4+0 \geq 0.5,
 \end{array}
